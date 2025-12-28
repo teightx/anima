@@ -1,98 +1,120 @@
 @import 'tailwindcss';
 
 /*
- * Ânima Design System
- * Light: off-white quente, cards brancos aquecidos, acento verde acinzentado
- * Dark: cinza profundo, baixo contraste, mesmos acentos com luminosidade ajustada
+ * Anima Design System
+ * Paleta desaturada com viés azul (blue light filter)
+ * Light: off-white frio, papel sob luz azul suave
+ * Dark: cinza azulado profundo, sem preto puro
+ * Acento: azul acinzentado/teal discreto
  */
 
 :root {
   /* Background */
-  --background: 40 20% 98%;
-  --foreground: 30 10% 12%;
+  --background: 210 35% 98%;
+  --foreground: 222 22% 18%;
 
   /* Card */
-  --card: 40 25% 99%;
-  --card-foreground: 30 10% 12%;
+  --card: 210 35% 99%;
+  --card-foreground: 222 22% 18%;
 
   /* Popover */
-  --popover: 40 25% 99%;
-  --popover-foreground: 30 10% 12%;
+  --popover: 210 35% 99%;
+  --popover-foreground: 222 22% 18%;
 
-  /* Primary - verde acinzentado */
-  --primary: 150 15% 35%;
-  --primary-foreground: 40 20% 98%;
+  /* Primary - azul acinzentado */
+  --primary: 210 22% 34%;
+  --primary-foreground: 210 40% 98%;
 
   /* Secondary */
-  --secondary: 40 10% 94%;
-  --secondary-foreground: 30 10% 25%;
+  --secondary: 210 18% 95%;
+  --secondary-foreground: 222 18% 20%;
 
   /* Muted */
-  --muted: 40 10% 94%;
-  --muted-foreground: 30 8% 46%;
+  --muted: 210 18% 94%;
+  --muted-foreground: 222 10% 42%;
 
   /* Accent */
-  --accent: 150 12% 90%;
-  --accent-foreground: 150 15% 30%;
+  --accent: 205 20% 92%;
+  --accent-foreground: 222 22% 18%;
 
-  /* Destructive */
-  --destructive: 0 60% 50%;
-  --destructive-foreground: 0 0% 100%;
+  /* Destructive - vermelho fechado */
+  --destructive: 0 55% 42%;
+  --destructive-foreground: 210 40% 98%;
 
   /* Border */
-  --border: 40 15% 88%;
+  --border: 214 18% 88%;
 
   /* Input */
-  --input: 40 15% 88%;
+  --input: 214 18% 88%;
 
   /* Ring */
-  --ring: 150 15% 35%;
+  --ring: 210 22% 40%;
 
   /* Radius */
   --radius: 0.5rem;
+
+  /* Shadow tokens */
+  --shadow-color: 214 30% 50%;
+  --shadow-sm: 0 1px 2px 0 hsl(var(--shadow-color) / 0.04);
+  --shadow-md:
+    0 2px 8px -2px hsl(var(--shadow-color) / 0.08),
+    0 1px 3px -1px hsl(var(--shadow-color) / 0.04);
+  --shadow-lg:
+    0 4px 16px -4px hsl(var(--shadow-color) / 0.1),
+    0 2px 6px -2px hsl(var(--shadow-color) / 0.05);
 }
 
 .dark {
-  /* Background - cinza profundo */
-  --background: 240 6% 10%;
-  --foreground: 40 10% 88%;
+  /* Background - cinza azulado profundo */
+  --background: 220 18% 10%;
+  --foreground: 210 20% 92%;
 
   /* Card */
-  --card: 240 5% 13%;
-  --card-foreground: 40 10% 88%;
+  --card: 220 16% 13%;
+  --card-foreground: 210 20% 92%;
 
   /* Popover */
-  --popover: 240 5% 13%;
-  --popover-foreground: 40 10% 88%;
+  --popover: 220 16% 13%;
+  --popover-foreground: 210 20% 92%;
 
-  /* Primary - verde acinzentado (ajustado para dark) */
-  --primary: 150 12% 55%;
-  --primary-foreground: 240 6% 10%;
+  /* Primary - azul acinzentado (ajustado para dark) */
+  --primary: 210 28% 62%;
+  --primary-foreground: 220 18% 10%;
 
   /* Secondary */
-  --secondary: 240 5% 18%;
-  --secondary-foreground: 40 10% 80%;
+  --secondary: 220 12% 18%;
+  --secondary-foreground: 210 20% 92%;
 
   /* Muted */
-  --muted: 240 5% 18%;
-  --muted-foreground: 40 6% 55%;
+  --muted: 220 12% 18%;
+  --muted-foreground: 210 10% 58%;
 
   /* Accent */
-  --accent: 240 5% 20%;
-  --accent-foreground: 150 12% 65%;
+  --accent: 220 12% 18%;
+  --accent-foreground: 210 20% 92%;
 
-  /* Destructive */
-  --destructive: 0 55% 45%;
-  --destructive-foreground: 0 0% 100%;
+  /* Destructive - vermelho fechado */
+  --destructive: 0 45% 48%;
+  --destructive-foreground: 210 20% 92%;
 
   /* Border */
-  --border: 240 5% 20%;
+  --border: 220 10% 20%;
 
   /* Input */
-  --input: 240 5% 20%;
+  --input: 220 10% 20%;
 
   /* Ring */
-  --ring: 150 12% 55%;
+  --ring: 210 28% 62%;
+
+  /* Shadow tokens */
+  --shadow-color: 220 40% 8%;
+  --shadow-sm: 0 1px 2px 0 hsl(var(--shadow-color) / 0.2);
+  --shadow-md:
+    0 2px 8px -2px hsl(var(--shadow-color) / 0.35),
+    0 1px 3px -1px hsl(var(--shadow-color) / 0.15);
+  --shadow-lg:
+    0 4px 16px -4px hsl(var(--shadow-color) / 0.45),
+    0 2px 6px -2px hsl(var(--shadow-color) / 0.2);
 }
 
 @theme inline {
@@ -141,7 +163,94 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Disable transitions on theme change to prevent flash */
-.theme-transition-disabled * {
-  transition: none !important;
+/* Background gradiente sutil - Light */
+:root body {
+  background-image:
+    radial-gradient(
+      1200px circle at 20% 0%,
+      rgba(100, 140, 255, 0.08),
+      transparent 55%
+    ),
+    linear-gradient(to bottom, rgba(100, 140, 255, 0.04), transparent 35%);
+  background-attachment: fixed;
+}
+
+/* Background gradiente sutil - Dark */
+.dark body {
+  background-image:
+    radial-gradient(
+      900px circle at 20% 0%,
+      rgba(120, 160, 255, 0.08),
+      transparent 55%
+    ),
+    linear-gradient(to bottom, rgba(120, 160, 255, 0.05), transparent 40%);
+  background-attachment: fixed;
+}
+
+/* Card shadow override para sombras mais suaves */
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Card específico - sombra suave e borda discreta */
+[data-slot='card'],
+.card-shadow {
+  box-shadow: var(--shadow-md);
+  border-color: hsl(var(--border) / 0.6);
+}
+
+/* Hover state para cards interativos */
+[data-slot='card']:hover,
+.card-shadow:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: hsl(var(--border) / 0.8);
+}
+
+/* Badge ajustes - mais suave */
+[data-slot='badge'] {
+  font-weight: 500;
+}
+
+/* Focus ring mais suave */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring) / 0.5);
+  outline-offset: 2px;
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted) / 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Selection color */
+::selection {
+  background: hsl(var(--primary) / 0.15);
+  color: hsl(var(--foreground));
+}
+
+.dark ::selection {
+  background: hsl(var(--primary) / 0.25);
 }
