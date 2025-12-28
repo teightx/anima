@@ -31,13 +31,18 @@ export async function GET(request: NextRequest, context: RouteContext) {
   }
 
   const checkin = dataset.checkins.find(c => c.date === date);
+  const override = getCheckinOverride(date);
+
+  // If we have an override for a new date (created via POST), return it
+  if (!checkin && override && override.id) {
+    return ok(override);
+  }
 
   if (!checkin) {
     return notFound(`No check-in found for date: ${date}`);
   }
 
-  // Apply any in-memory overrides
-  const override = getCheckinOverride(date);
+  // Apply any in-memory overrides to existing checkin
   const result = override ? { ...checkin, ...override } : checkin;
 
   return ok(result);

@@ -1,4 +1,8 @@
-import type { DailyCheckIn, JournalEntry, SharingRule } from '@/server/contracts';
+import type {
+  DailyCheckIn,
+  JournalEntry,
+  SharingRule,
+} from '@/server/contracts';
 
 /**
  * In-memory storage for development/testing
