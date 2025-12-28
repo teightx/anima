@@ -7,6 +7,12 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   prettier,
+  {
+    rules: {
+      // Allow setState in effects for theme providers and client-side initialization
+      'react-hooks/set-state-in-effect': 'off',
+    },
+  },
   globalIgnores([
     '.next/**',
     'out/**',
