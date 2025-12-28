@@ -14,6 +14,7 @@ import { formatDisplayDate, getRelativeDay } from '@/lib/appDate';
 import type { DailyCheckIn } from '@/server/contracts';
 import { CheckinWizard } from './CheckinWizard';
 import { CheckinSummary } from './CheckinSummary';
+import { JournalSection } from '@/features/journal';
 
 type PageState = 'loading' | 'empty' | 'has-data' | 'wizard' | 'error';
 
@@ -140,8 +141,9 @@ export function TodayClient({ date, asOf }: TodayClientProps) {
   // Has data state
   if (state === 'has-data' && checkin) {
     return (
-      <div className="space-y-4">
+      <div className="space-y-6">
         <CheckinSummary checkin={checkin} dateLabel={dateLabel} />
+        <JournalSection date={date} />
       </div>
     );
   }
