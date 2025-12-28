@@ -6,19 +6,33 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { getLangFromSearchParams, t } from '@/lib/i18n';
 
-export default function TodayPage() {
+interface TodayPageProps {
+  searchParams: Promise<{ lang?: string }>;
+}
+
+export default async function TodayPage({ searchParams }: TodayPageProps) {
+  const params = await searchParams;
+  const lang = getLangFromSearchParams(params);
+
   return (
     <PageContainer>
-      <PageHeader title="Hoje" description="Check-in diario e estado atual" />
+      <PageHeader
+        title={t(lang, 'page.today.title')}
+        description={t(lang, 'page.today.subtitle')}
+      />
 
       {/* Status Card */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Em desenvolvimento</CardTitle>
+          <CardTitle className="text-base">
+            {t(lang, 'common.inDevelopment')}
+          </CardTitle>
           <CardDescription>
-            Esta secao permitira registrar seu estado diario e visualizar
-            metricas do dia.
+            {lang === 'en'
+              ? 'This section will allow you to record your daily state and view metrics.'
+              : 'Esta secao permitira registrar seu estado diario e visualizar metricas do dia.'}
           </CardDescription>
         </CardHeader>
       </Card>
