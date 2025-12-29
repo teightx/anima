@@ -2,11 +2,13 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { FileText } from 'lucide-react';
+import { Info } from 'lucide-react';
 
 /**
  * Indicador discreto de modo demo
  * Só aparece quando ?demo=1 está presente na URL
+ * 
+ * Comunica: "Isso é demonstração" de forma discreta mas clara
  */
 export function DemoIndicator() {
   const searchParams = useSearchParams();
@@ -17,14 +19,16 @@ export function DemoIndicator() {
   }
 
   return (
-    <Link
-      href="/demo"
-      className="inline-flex items-center gap-1.5 text-[0.6875rem] text-muted-foreground/60 hover:text-muted-foreground transition-colors"
-      title="Ver roteiro da demo"
-    >
-      <FileText className="h-3 w-3" />
-      <span>Roteiro</span>
-    </Link>
+    <div className="fixed bottom-4 left-4 z-50">
+      <Link
+        href="/demo"
+        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface border border-hairline text-[0.75rem] text-muted-foreground hover:text-foreground hover:border-primary/30 transition-colors shadow-[var(--shadow-soft)]"
+        title="Ambiente de demonstração"
+      >
+        <Info className="h-3 w-3" />
+        <span>Dados de exemplo</span>
+      </Link>
+    </div>
   );
 }
 

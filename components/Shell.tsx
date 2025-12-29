@@ -1,7 +1,8 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { AppSidebar, MobileNav } from '@/components/nav';
+import { DemoIndicator } from '@/components/layout';
 
 interface ShellProps {
   children: ReactNode;
@@ -37,6 +38,11 @@ export function Shell({ children }: ShellProps) {
 
       {/* Bottom Navigation - Mobile */}
       <MobileNav />
+
+      {/* Demo Mode Indicator */}
+      <Suspense fallback={null}>
+        <DemoIndicator />
+      </Suspense>
     </div>
   );
 }

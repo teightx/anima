@@ -1,123 +1,96 @@
 import Link from 'next/link';
 import { ArrowRight, Calendar, FolderOpen, Eye, ListChecks, Settings } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { LogoMock } from '@/components/brand';
 
-const DEMO_STEPS = [
+const DEMO_SECTIONS = [
   {
-    number: 1,
-    title: 'Hoje',
-    description: 'Registro do dia, resumo e contexto',
+    name: 'Hoje',
+    description: 'registro do dia atual',
     href: '/today?demo=1',
     icon: Calendar,
-    highlight: 'Ponto de entrada do usuário',
   },
   {
-    number: 2,
-    title: 'Registros',
-    description: 'Calendário e visão agregada',
-    href: '/history?demo=1',
+    name: 'Registros',
+    description: 'histórico, lista e gráficos',
+    href: '/records?demo=1',
     icon: FolderOpen,
-    highlight: 'Padrões ao longo do tempo',
   },
   {
-    number: 3,
-    title: 'Observações',
-    description: 'Observações derivadas + fontes científicas',
+    name: 'Observações',
+    description: 'leituras descritivas baseadas nos dados',
     href: '/readings?demo=1',
     icon: Eye,
-    highlight: 'Feedback do usuário',
   },
   {
-    number: 4,
-    title: 'Planos',
-    description: 'Biblioteca e plano em andamento',
+    name: 'Planos',
+    description: 'estruturas opcionais de organização',
     href: '/protocols?demo=1',
     icon: ListChecks,
-    highlight: 'Acompanhamento estruturado',
   },
   {
-    number: 5,
-    title: 'Configurações',
-    description: 'Compartilhamento com profissional',
+    name: 'Configurações',
+    description: 'controle de dados e compartilhamento',
     href: '/anima?demo=1',
     icon: Settings,
-    highlight: 'Controle do usuário',
   },
-];
-
-const KEY_MESSAGES = [
-  'Observacional, não prescritivo',
-  'Dados do usuário, controle do usuário',
-  'Baseado em evidências',
-  'Sem julgamento sobre lacunas',
-  'Design institucional e de longo prazo',
 ];
 
 export default function DemoPage() {
   return (
-    <div className="space-y-8">
+    <div className="max-w-xl mx-auto space-y-10">
       {/* Header */}
-      <header className="space-y-4">
-        <LogoMock size="default" />
-        <div className="space-y-2">
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-semibold tracking-tight">Roteiro de Demonstração</h1>
-            <Badge variant="outline" className="text-[0.6875rem]">2–3 min</Badge>
-          </div>
-          <p className="text-muted-foreground leading-relaxed">
-            Apresente o Ânima como um produto de acompanhamento contínuo de bem-estar: 
-            observacional, institucional e centrado no controle do usuário.
-          </p>
-        </div>
+      <header className="text-center space-y-4">
+        <LogoMock size="large" />
+        <p className="text-lg text-muted-foreground">
+          Demonstração do produto
+        </p>
       </header>
 
-      {/* Quick Start */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-base">Início Rápido</CardTitle>
-          <CardDescription>
-            Clique para iniciar a demo no ponto recomendado
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Button asChild className="w-full sm:w-auto">
-            <Link href="/today?demo=1">
-              Iniciar Demo
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-        </CardContent>
-      </Card>
+      {/* Context */}
+      <section className="rounded-xl border border-hairline bg-surface-2/30 p-5 space-y-3">
+        <p className="text-[0.9375rem] text-foreground leading-relaxed">
+          Esta é uma demonstração do Ânima.
+        </p>
+        <p className="text-[0.875rem] text-muted-foreground leading-relaxed">
+          Os dados exibidos são exemplos e servem apenas para mostrar a navegação 
+          e a organização das informações.
+        </p>
+      </section>
 
-      {/* Steps */}
+      {/* CTA */}
+      <div className="text-center">
+        <Button asChild size="lg">
+          <Link href="/today?demo=1">
+            Entrar no app
+            <ArrowRight className="h-4 w-4 ml-2" />
+          </Link>
+        </Button>
+      </div>
+
+      {/* Navigation */}
       <section className="space-y-4">
-        <h2 className="text-sm font-medium text-muted-foreground">Roteiro em 5 passos</h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {DEMO_STEPS.map((step) => {
-            const Icon = step.icon;
+        <h2 className="text-sm font-medium text-muted-foreground text-center">
+          Navegação rápida
+        </h2>
+        <div className="grid gap-2.5 sm:grid-cols-2">
+          {DEMO_SECTIONS.map((section) => {
+            const Icon = section.icon;
             return (
-              <Link key={step.number} href={step.href}>
+              <Link key={section.name} href={section.href}>
                 <Card className="h-full transition-colors hover:border-primary/30">
                   <CardContent className="p-4">
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-text-muted">
                         <Icon className="h-4 w-4" />
                       </div>
-                      <div className="space-y-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className="text-[0.6875rem] font-medium text-muted-foreground">
-                            {step.number}.
-                          </span>
-                          <span className="text-sm font-medium">{step.title}</span>
-                        </div>
-                        <p className="text-[0.8125rem] text-muted-foreground line-clamp-1">
-                          {step.description}
-                        </p>
-                        <p className="text-[0.6875rem] text-primary/70">
-                          {step.highlight}
+                      <div className="min-w-0">
+                        <span className="text-sm font-medium text-foreground">
+                          {section.name}
+                        </span>
+                        <p className="text-[0.8125rem] text-muted-foreground truncate">
+                          {section.description}
                         </p>
                       </div>
                     </div>
@@ -129,39 +102,13 @@ export default function DemoPage() {
         </div>
       </section>
 
-      {/* Key Messages */}
-      <section className="space-y-3">
-        <h2 className="text-sm font-medium text-muted-foreground">Mensagens-chave</h2>
-        <div className="flex flex-wrap gap-2">
-          {KEY_MESSAGES.map((message, i) => (
-            <Badge key={i} variant="secondary" className="text-[0.75rem] font-normal">
-              {message}
-            </Badge>
-          ))}
-        </div>
+      {/* Status */}
+      <section className="text-center space-y-2 pt-4 border-t border-border/40">
+        <p className="text-[0.75rem] text-muted-foreground/60">
+          Ambiente de demonstração • Dados de exemplo
+        </p>
+        <LogoMock size="small" showDot={false} />
       </section>
-
-      {/* Technical Notes */}
-      <section className="rounded-lg bg-muted/30 p-4 space-y-2">
-        <h2 className="text-[0.8125rem] font-medium text-muted-foreground">Notas Técnicas</h2>
-        <ul className="text-[0.75rem] text-muted-foreground/70 space-y-1">
-          <li>• <strong>Modo demo:</strong> <code className="bg-muted px-1 rounded">?demo=1</code> fixa a data em 2024-12-30</li>
-          <li>• <strong>Dataset:</strong> 30 dias de dados simulados com padrões realistas</li>
-          <li>• <strong>Lacunas:</strong> Dias 8, 15, 22 e 23 sem registro (intencional)</li>
-          <li>• <strong>Plano ativo:</strong> "Regulação de Sono" em andamento</li>
-        </ul>
-      </section>
-
-      {/* Footer */}
-      <footer className="pt-4 border-t border-border/40">
-        <div className="flex flex-col items-center gap-2">
-          <LogoMock size="small" />
-          <p className="text-[0.75rem] text-muted-foreground/60 text-center">
-            Acompanhamento contínuo de bem-estar
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }
-

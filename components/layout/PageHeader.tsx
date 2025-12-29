@@ -1,6 +1,4 @@
-import { Suspense } from 'react';
 import { cn } from '@/lib/utils';
-import { DemoIndicator } from './DemoIndicator';
 
 interface PageHeaderProps {
   /** Título da página (obrigatório) */
@@ -42,12 +40,7 @@ export function PageHeader({
       <div className="flex items-start justify-between gap-4">
         {/* Título e descrição */}
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-3">
-            <h1 className="text-h1 truncate">{title}</h1>
-            <Suspense fallback={null}>
-              <DemoIndicator />
-            </Suspense>
-          </div>
+          <h1 className="text-h1 truncate">{title}</h1>
           {description && (
             <p className="mt-1.5 text-body-sm text-text-muted max-w-2xl">
               {description}
