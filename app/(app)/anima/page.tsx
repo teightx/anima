@@ -1,11 +1,11 @@
 import { PageHeader, PageContainer } from '@/components/layout';
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card';
+  QuietCard,
+  QuietCardHeader,
+  QuietCardTitle,
+  QuietCardDescription,
+  QuietCardContent,
+} from '@/components/system';
 import { ThemeToggle } from '@/components/theme';
 import { getLangFromSearchParams, t } from '@/lib/i18n';
 import { parseTestOptions } from '@/lib/apiClient';
@@ -28,33 +28,33 @@ export default async function AnimaPage({ searchParams }: AnimaPageProps) {
   return (
     <PageContainer>
       <PageHeader
-        title={t(lang, 'page.anima.title')}
-        description={t(lang, 'page.anima.subtitle')}
+        title={t(lang, 'page.settings.title')}
+        description={t(lang, 'page.settings.subtitle')}
       />
 
       {/* Therapy Hub */}
       <TherapyClient fetchOptions={fetchOptions} />
 
       {/* Settings Section - Mobile Theme Toggle Access */}
-      <Card variant="static" className="mt-6">
-        <CardHeader>
-          <CardTitle className="text-[0.9375rem]">Preferências</CardTitle>
-          <CardDescription>
+      <QuietCard>
+        <QuietCardHeader>
+          <QuietCardTitle>Preferências</QuietCardTitle>
+          <QuietCardDescription>
             Ajustes de aparência
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-between py-2">
+          </QuietCardDescription>
+        </QuietCardHeader>
+        <QuietCardContent>
+          <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-foreground">Tema</p>
-              <p className="text-[0.75rem] text-muted-foreground">
+              <p className="text-body-sm font-medium text-text-primary">Tema</p>
+              <p className="text-caption text-text-muted">
                 Modo claro ou escuro
               </p>
             </div>
             <ThemeToggle />
           </div>
-        </CardContent>
-      </Card>
+        </QuietCardContent>
+      </QuietCard>
     </PageContainer>
   );
 }

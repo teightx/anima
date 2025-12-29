@@ -2,12 +2,16 @@
 
 import { ArrowLeft } from 'lucide-react';
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card';
+  QuietCard,
+  QuietCardHeader,
+  QuietCardTitle,
+  QuietCardDescription,
+  QuietCardContent,
+  SectionHeader,
+  InlineNote,
+  MetaRow,
+  MetaRowGroup,
+} from '@/components/system';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { Protocol, ProtocolRun as ProtocolRunType } from '../types';
@@ -48,19 +52,15 @@ export function ProtocolRun({
       </Button>
 
       {/* Header */}
-      <Card>
-        <CardHeader>
+      <QuietCard>
+        <QuietCardHeader>
           <div className="flex items-start justify-between gap-2">
-            <div className="space-y-1">
-              <CardTitle className="text-lg">{protocol.name}</CardTitle>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary" className="text-xs">
-                  {formatCategory(protocol.category)}
-                </Badge>
-                <span className="text-xs text-muted-foreground">
-                  {formatDuration(protocol.durationDays)}
-                </span>
-              </div>
+            <div className="space-y-2">
+              <QuietCardTitle className="text-h3">{protocol.name}</QuietCardTitle>
+              <MetaRowGroup separator={false}>
+                <Badge variant="secondary">{formatCategory(protocol.category)}</Badge>
+                <MetaRow label="" value={formatDuration(protocol.durationDays)} />
+              </MetaRowGroup>
             </div>
             {isActive && (
               <Badge variant="outline" className="shrink-0">
@@ -68,71 +68,62 @@ export function ProtocolRun({
               </Badge>
             )}
           </div>
-          <CardDescription className="mt-2">
+          <QuietCardDescription className="mt-3">
             {protocol.description}
-          </CardDescription>
-        </CardHeader>
+          </QuietCardDescription>
+        </QuietCardHeader>
 
         {/* Progress */}
         {run && (
-          <CardContent>
+          <QuietCardContent className="pt-0">
             <ProtocolProgress protocol={protocol} run={run} />
-          </CardContent>
+          </QuietCardContent>
         )}
-      </Card>
+      </QuietCard>
 
-      {/* Checklist */}
+      {/* Checkpoints */}
       {isActive ? (
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Tarefas
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
+        <QuietCard>
+          <SectionHeader title="Checkpoints" size="small" />
+          <QuietCardContent>
             <ProtocolChecklist
               steps={steps}
               onTaskToggle={handleTaskToggle}
               isLoading={isUpdating}
             />
-          </CardContent>
-        </Card>
+          </QuietCardContent>
+        </QuietCard>
       ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Estrutura do protocolo</CardTitle>
-            <CardDescription>
-              Este protocolo contem {protocol.steps.length} etapa
-              {protocol.steps.length !== 1 && 's'}.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        <QuietCard>
+          <QuietCardHeader>
+            <QuietCardTitle>Estrutura do plano</QuietCardTitle>
+            <QuietCardDescription>
+              Este plano contém {protocol.steps.length} passo
+              {protocol.steps.length !== 1 ? 's' : ''}.
+            </QuietCardDescription>
+          </QuietCardHeader>
+          <QuietCardContent className="space-y-4">
             {protocol.steps.map(step => (
               <div key={step.id} className="space-y-1">
-                <p className="text-sm font-medium text-foreground">
+                <p className="text-body-sm font-medium text-text-primary">
                   {step.order}. {step.title}
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-caption text-text-muted">
                   {step.description}
                 </p>
-                <p className="text-xs text-muted-foreground">
-                  {step.tasks.length} tarefa{step.tasks.length !== 1 && 's'}
+                <p className="text-caption text-text-muted">
+                  {step.tasks.length} passo{step.tasks.length !== 1 ? 's' : ''}
                 </p>
               </div>
             ))}
-          </CardContent>
-        </Card>
+          </QuietCardContent>
+        </QuietCard>
       )}
 
-      {/* Info disclaimer */}
-      <div className="rounded-lg bg-muted/50 p-4">
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          Protocolos sao ferramentas de apoio e nao substituem acompanhamento
-          profissional. Voce pode pausar ou encerrar a qualquer momento sem
-          penalidade.
-        </p>
-      </div>
+      {/* Disclaimer obrigatório */}
+      <InlineNote>
+        Planos são estruturas opcionais de organização. Não constituem tratamento ou recomendação.
+      </InlineNote>
     </div>
   );
 }
-

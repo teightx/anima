@@ -24,8 +24,8 @@ export default async function DashboardPage({
   return (
     <PageContainer>
       <PageHeader
-        title={t(lang, 'page.dashboard.title')}
-        description={t(lang, 'page.dashboard.subtitle')}
+        title={t(lang, 'page.records.title')}
+        description={t(lang, 'page.records.subtitle')}
       />
 
       <ObservabilityClient asOf={asOf} fetchOptions={fetchOptions} />

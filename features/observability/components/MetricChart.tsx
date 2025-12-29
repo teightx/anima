@@ -8,7 +8,11 @@ import {
   YAxis,
   Tooltip,
 } from 'recharts';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import {
+  QuietCard,
+  QuietCardContent,
+  SectionHeader,
+} from '@/components/system';
 import type { DataPoint, MetricConfig } from '../types';
 
 interface MetricChartProps {
@@ -33,9 +37,13 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   if (value === null || value === undefined) return null;
 
   return (
-    <div className="bg-popover border border-border/60 rounded-md px-3 py-2 shadow-[var(--shadow-md)]">
-      <p className="text-[0.6875rem] text-muted-foreground">{label}</p>
-      <p className="text-sm font-medium tabular-nums">{value}</p>
+    <div className="bg-surface border border-hairline rounded-lg px-3 py-2 shadow-[var(--shadow-soft)]">
+      <p className="text-overline text-text-muted uppercase tracking-wider">
+        {label}
+      </p>
+      <p className="text-body-sm font-medium tabular-nums text-text-primary">
+        {value}
+      </p>
     </div>
   );
 }
@@ -43,36 +51,25 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
 export function MetricChart({ config, data }: MetricChartProps) {
   const hasData = data.some(d => d.value !== null);
 
+  const title = config.unit ? `${config.title} (${config.unit})` : config.title;
+
   if (!hasData) {
     return (
-      <Card variant="static">
-        <CardHeader className="pb-2">
-          <CardTitle className="text-[0.8125rem] font-medium text-muted-foreground">
-            {config.title}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="h-28 flex items-center justify-center text-[0.8125rem] text-muted-foreground/70">
+      <QuietCard>
+        <SectionHeader title={title} size="small" className="mb-2" />
+        <QuietCardContent>
+          <div className="h-28 flex items-center justify-center text-body-sm text-text-muted">
             Sem registros neste período
           </div>
-        </CardContent>
-      </Card>
+        </QuietCardContent>
+      </QuietCard>
     );
   }
 
   return (
-    <Card variant="static">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-[0.8125rem] font-medium text-muted-foreground">
-          {config.title}
-          {config.unit && (
-            <span className="ml-1 text-[0.6875rem] font-normal text-muted-foreground/70">
-              ({config.unit})
-            </span>
-          )}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+    <QuietCard>
+      <SectionHeader title={title} size="small" className="mb-2" />
+      <QuietCardContent>
         <div className="h-28">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -83,7 +80,7 @@ export function MetricChart({ config, data }: MetricChartProps) {
                 dataKey="label"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 9, fill: 'hsl(var(--muted-foreground))' }}
+                tick={{ fontSize: 9, fill: 'hsl(var(--text-muted))' }}
                 interval="preserveStartEnd"
                 tickMargin={6}
               />
@@ -91,7 +88,7 @@ export function MetricChart({ config, data }: MetricChartProps) {
                 domain={[config.min, config.max]}
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 9, fill: 'hsl(var(--muted-foreground))' }}
+                tick={{ fontSize: 9, fill: 'hsl(var(--text-muted))' }}
                 width={28}
                 tickMargin={4}
               />
@@ -108,7 +105,7 @@ export function MetricChart({ config, data }: MetricChartProps) {
             </LineChart>
           </ResponsiveContainer>
         </div>
-      </CardContent>
-    </Card>
+      </QuietCardContent>
+    </QuietCard>
   );
 }

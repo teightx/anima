@@ -28,14 +28,16 @@ export interface MetricConfig {
   color: string;
 }
 
+// Cores baseadas na paleta do Design System v2
+// Azul mineral com variações sutis de matiz
 export const METRIC_CONFIGS: MetricConfig[] = [
-  { key: 'mood', title: 'Humor percebido', min: 0, max: 10, color: 'hsl(205, 28%, 52%)' },
+  { key: 'mood', title: 'Humor percebido', min: 0, max: 10, color: 'hsl(210, 32%, 42%)' },
   {
     key: 'energy',
     title: 'Nível de energia',
     min: 0,
     max: 10,
-    color: 'hsl(200, 22%, 50%)',
+    color: 'hsl(205, 28%, 48%)',
   },
   {
     key: 'sleep',
@@ -43,14 +45,14 @@ export const METRIC_CONFIGS: MetricConfig[] = [
     min: 0,
     max: 12,
     unit: 'h',
-    color: 'hsl(210, 20%, 55%)',
+    color: 'hsl(215, 25%, 45%)',
   },
   {
     key: 'dayOrganization',
     title: 'Estrutura do dia',
     min: 0,
     max: 10,
-    color: 'hsl(215, 18%, 50%)',
+    color: 'hsl(220, 22%, 50%)',
   },
 ];
 

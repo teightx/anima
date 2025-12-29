@@ -32,7 +32,7 @@ export function ProtocolProgress({ protocol, run }: ProtocolProgressProps) {
       </div>
       {progress === 100 && (
         <p className="text-sm text-muted-foreground">
-          Todas as tarefas foram concluidas.
+          Todos os passos foram concluídos.
         </p>
       )}
     </div>

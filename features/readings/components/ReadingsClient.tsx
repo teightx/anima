@@ -70,13 +70,13 @@ export function ReadingsClient({ asOf, fetchOptions }: ReadingsClientProps) {
         );
 
         if (action === 'useful') {
-          success('Marcada como util');
+          success('Marcada como útil');
         } else if (action === 'hidden') {
-          success('Leitura ocultada');
+          success('Observação ocultada');
         }
         return true;
       } else {
-        showError('Nao foi possivel salvar');
+        showError('Não foi possível salvar');
         return false;
       }
     },
@@ -106,8 +106,8 @@ export function ReadingsClient({ asOf, fetchOptions }: ReadingsClientProps) {
   if (state === 'error') {
     return (
       <ErrorState
-        title="Nao foi possivel carregar"
-        description={error || 'Ocorreu um erro ao buscar as leituras.'}
+        title="Não foi possível carregar"
+        description={error || 'Ocorreu um erro ao buscar as observações.'}
         onRetry={loadReadings}
       />
     );
@@ -116,9 +116,9 @@ export function ReadingsClient({ asOf, fetchOptions }: ReadingsClientProps) {
   const isFiltered = activeTab !== 'all';
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 overflow-x-hidden">
       {/* Filters */}
-      <div className="space-y-4">
+      <div className="space-y-4 overflow-x-hidden">
         <CategoryTabs
           activeTab={activeTab}
           counts={tabCounts}

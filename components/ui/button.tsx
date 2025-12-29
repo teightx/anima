@@ -4,24 +4,24 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/35 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
         default:
-          'bg-primary text-primary-foreground shadow-[var(--shadow-sm)] hover:bg-primary/90',
+          'bg-primary text-primary-foreground shadow-[var(--shadow-subtle)] hover:bg-primary-hover',
         destructive:
-          'bg-destructive text-destructive-foreground shadow-[var(--shadow-sm)] hover:bg-destructive/90',
+          'bg-danger-muted text-danger-muted-foreground shadow-[var(--shadow-subtle)] hover:bg-danger-muted/80',
         outline:
-          'border border-border/60 bg-background hover:bg-muted/50 hover:border-border',
+          'border border-hairline bg-background text-text-secondary hover:bg-surface-2 hover:text-text-primary hover:border-border',
         secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+          'bg-surface-2 text-text-secondary hover:bg-surface-2/80 hover:text-text-primary',
         ghost: 
-          'hover:bg-muted/50 hover:text-foreground',
+          'text-text-secondary hover:bg-surface-2 hover:text-text-primary',
         link: 
           'text-primary underline-offset-4 hover:underline',
         muted:
-          'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground',
+          'bg-surface-2/60 text-text-muted hover:bg-surface-2 hover:text-text-secondary',
       },
       size: {
         default: 'h-9 px-4 py-2',

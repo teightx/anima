@@ -27,12 +27,12 @@ function SliderField({
   const id = label.toLowerCase().replace(/\s+/g, '-');
 
   return (
-    <div className="space-y-2.5">
+    <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <label htmlFor={id} className="text-sm text-muted-foreground">
+        <label htmlFor={id} className="text-body-sm text-text-muted">
           {label}
         </label>
-        <span className="text-sm font-medium text-foreground tabular-nums min-w-[1.5rem] text-right">
+        <span className="text-body-sm font-medium text-text-primary tabular-nums min-w-[1.5rem] text-right">
           {value}
         </span>
       </div>
@@ -49,7 +49,7 @@ function SliderField({
         aria-valuenow={value}
       />
       {(lowLabel || highLabel) && (
-        <div className="flex justify-between text-[0.6875rem] text-muted-foreground/70">
+        <div className="flex justify-between text-overline text-text-muted/70 normal-case tracking-normal">
           <span>{lowLabel}</span>
           <span>{highLabel}</span>
         </div>
@@ -58,17 +58,23 @@ function SliderField({
   );
 }
 
+/**
+ * Step1State — Núcleo do registro
+ * 
+ * Campos: Humor, Energia, Tensão
+ * Linguagem neutra e descritiva
+ */
 export function Step1State({ data, onChange }: Step1StateProps) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <div className="space-y-1">
-        <h3 className="text-base font-medium">Estado atual</h3>
-        <p className="text-sm text-muted-foreground">
-          Registre como você percebe este momento.
+        <h3 className="text-h4">Estado percebido</h3>
+        <p className="text-body-sm text-text-muted">
+          Como você percebe este momento.
         </p>
       </div>
 
-      <div className="space-y-5">
+      <div className="space-y-4">
         <SliderField
           label="Humor"
           value={data.moodScore}
@@ -90,7 +96,7 @@ export function Step1State({ data, onChange }: Step1StateProps) {
         />
 
         <SliderField
-          label="Ansiedade"
+          label="Tensão"
           value={data.anxietyLevel}
           onChange={value => onChange({ anxietyLevel: value })}
           min={0}

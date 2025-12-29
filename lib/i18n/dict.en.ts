@@ -3,37 +3,35 @@ import type { Dictionary } from './types';
 export const en: Partial<Dictionary> = {
   // Navigation
   'nav.today': 'Today',
-  'nav.history': 'History',
-  'nav.readings': 'Readings',
-  'nav.protocols': 'Protocols',
-  'nav.anima': 'Ânima',
+  'nav.records': 'Records',
+  'nav.observations': 'Observations',
+  'nav.plans': 'Plans',
+  'nav.settings': 'Settings',
 
   // Page: Today
   'page.today.title': 'Today',
   'page.today.subtitle': 'Daily record',
 
-  // Page: History
-  'page.history.title': 'History',
-  'page.history.subtitle': 'Accumulated records',
+  // Page: Records (former History + Dashboard)
+  'page.records.title': 'Records',
+  'page.records.subtitle': 'Your accumulated records',
 
-  // Page: Readings
-  'page.readings.title': 'Readings',
-  'page.readings.subtitle': 'Observations derived from your records',
+  // Page: Observations (former Readings)
+  'page.observations.title': 'Observations',
+  'page.observations.subtitle': 'Observations derived from your records',
 
-  // Page: Protocols
-  'page.protocols.title': 'Protocols',
-  'page.protocols.subtitle': 'Structured follow-ups',
+  // Page: Plans (former Protocols)
+  'page.plans.title': 'Plans',
+  'page.plans.subtitle': 'Structured follow-ups',
 
-  // Page: Anima
-  'page.anima.title': 'Ânima',
-  'page.anima.subtitle': 'Settings hub',
+  // Page: Settings (former Ânima)
+  'page.settings.title': 'Settings',
+  'page.settings.subtitle': 'Settings hub',
 
-  // Page: Dashboard
-  'page.dashboard.title': 'Overview',
-  'page.dashboard.subtitle': 'Aggregated view of records',
-
-  // Navigation extras
-  'nav.dashboard': 'Overview',
+  // Day Context (former Journal)
+  'dayContext.sectionTitle': 'Day context',
+  'dayContext.placeholder': 'Add context about your day...',
+  'dayContext.add': 'Add context',
 
   // References
   'references.title': 'Source',
@@ -48,24 +46,26 @@ export const en: Partial<Dictionary> = {
   'references.back': 'Back',
   'references.viewSource': 'View source',
 
-  // Protocols
-  'protocols.start': 'Start',
-  'protocols.inProgress': 'In progress',
-  'protocols.complete': 'Complete',
-  'protocols.empty': 'No protocols available',
-  'protocols.back': 'Back',
-  'protocols.continue': 'Continue',
-  'protocols.taskCompleted': 'Task recorded',
+  // Plans (former Protocols)
+  'plans.start': 'Start',
+  'plans.inProgress': 'In progress',
+  'plans.complete': 'Complete',
+  'plans.empty': 'No plans available',
+  'plans.back': 'Back',
+  'plans.continue': 'Continue',
+  'plans.taskCompleted': 'Task recorded',
+  'plans.disclaimer': 'Plans are support tools for follow-up. You can pause or end at any time.',
 
-  // Therapy
-  'therapy.status.active': 'Active',
-  'therapy.status.inactive': 'Inactive',
-  'therapy.activate': 'Enable sharing',
-  'therapy.deactivate': 'Disable',
-  'therapy.sharing.title': 'Shared data',
-  'therapy.preview.title': 'Professional view',
-  'therapy.consent.notice':
-    'You control which data is shared. Nothing is sent without your authorization.',
+  // Sharing (former Therapy)
+  'sharing.title': 'Share with professional',
+  'sharing.status.active': 'Active',
+  'sharing.status.inactive': 'Inactive',
+  'sharing.activate': 'Enable sharing',
+  'sharing.deactivate': 'Disable',
+  'sharing.dataTitle': 'Shared data',
+  'sharing.preview.title': 'Professional view',
+  'sharing.consent.notice':
+    'Nothing is shared automatically. You control exactly what will be visible.',
 
   // Common
   'common.inDevelopment': 'In development',
@@ -91,30 +91,31 @@ export const en: Partial<Dictionary> = {
   'feedback.loadError': 'Could not load',
   'feedback.noData': 'Record when you prefer.',
 
-  // Readings
-  'readings.tabs.all': 'All',
-  'readings.tabs.sleep': 'Sleep',
-  'readings.tabs.stability': 'Stability',
-  'readings.tabs.routine': 'Routine',
-  'readings.tabs.consistency': 'Consistency',
-  'readings.period.week': '7 days',
-  'readings.period.month': '30 days',
-  'readings.showHidden': 'View archived',
-  'readings.empty.title': 'No readings in this category',
-  'readings.empty.body': 'Try another category or period.',
-  'readings.actions.useful': 'Useful',
-  'readings.actions.notApplicable': 'Not applicable',
-  'readings.actions.hide': 'Archive',
-  'readings.meta.confidence': 'Confidence',
-  'readings.meta.severity': 'Relevance',
-  'readings.meta.source': 'Source',
+  // Observations (former Readings)
+  'observations.tabs.all': 'All',
+  'observations.tabs.sleep': 'Sleep',
+  'observations.tabs.stability': 'Stability',
+  'observations.tabs.routine': 'Routine',
+  'observations.tabs.consistency': 'Consistency',
+  'observations.period.week': '7 days',
+  'observations.period.month': '30 days',
+  'observations.showHidden': 'View archived',
+  'observations.empty.title': 'No observations in this category',
+  'observations.empty.body': 'Try another category or period.',
+  'observations.actions.useful': 'Useful',
+  'observations.actions.notApplicable': 'Not applicable',
+  'observations.actions.hide': 'Archive',
+  'observations.meta.confidence': 'Confidence',
+  'observations.meta.severity': 'Relevance',
+  'observations.meta.source': 'Source',
+  'observations.disclaimer': 'Observations are descriptive and do not imply cause, diagnosis or recommendation.',
 
   // Check-in
   'checkin.empty.title': 'No record',
   'checkin.empty.body': 'No record for this date.',
   'checkin.empty.cta': 'Record',
 
-  // Journal
-  'journal.sectionTitle': 'Notes',
-  'journal.placeholder': 'Write your observations...',
+  // Day Context (former Journal)
+  'journal.sectionTitle': 'Day context',
+  'journal.placeholder': 'Add context about your day...',
 };

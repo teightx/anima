@@ -24,8 +24,8 @@ export default async function ReadingsPage({
   return (
     <PageContainer>
       <PageHeader
-        title={t(lang, 'page.readings.title')}
-        description={t(lang, 'page.readings.subtitle')}
+        title={t(lang, 'page.observations.title')}
+        description={t(lang, 'page.observations.subtitle')}
       />
 
       <ReadingsClient asOf={asOf} fetchOptions={fetchOptions} />

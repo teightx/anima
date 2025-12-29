@@ -6,9 +6,9 @@ import { ArrowLeft, FileQuestion } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getJSON, type FetchOptions } from '@/lib/apiClient';
 import { ErrorState, EmptyState } from '@/components/feedback';
+import { PageHeader } from '@/components/layout';
 import type { ReferenceSource } from '@/server/contracts';
 import type { ReferencePageState } from '../types';
-import { ReferenceHeader } from './ReferenceHeader';
 import { ReferenceSummary } from './ReferenceSummary';
 import { ReferenceKeyFindings } from './ReferenceKeyFindings';
 import { ReferenceMeta } from './ReferenceMeta';
@@ -104,21 +104,37 @@ export function ReferenceClient({
 
   return (
     <div className="space-y-6">
-      <ReferenceHeader reference={reference} backHref={backHref} />
+      <PageHeader
+        title={reference.title}
+        actions={
+          <Button variant="ghost" size="sm" asChild className="-ml-2">
+            <Link href={backHref}>
+              <ArrowLeft className="h-4 w-4" />
+              Voltar
+            </Link>
+          </Button>
+        }
+      />
 
+      {/* O que diz o estudo */}
       <ReferenceSummary abstract={reference.abstract} />
 
+      {/* Principais pontos */}
       <ReferenceKeyFindings findings={reference.keyFindings} />
 
+      {/* Força da evidência */}
+      <ReferenceMeta reference={reference} />
+
+      {/* Limitações */}
       <ReferenceLimitations
         type={reference.type}
         evidenceLevel={reference.evidenceLevel}
       />
 
-      <ReferenceMeta reference={reference} />
-
+      {/* Relação com seus registros */}
       <ReferenceUserContext />
 
+      {/* Disclaimer obrigatório */}
       <ReferenceDisclaimer />
     </div>
   );

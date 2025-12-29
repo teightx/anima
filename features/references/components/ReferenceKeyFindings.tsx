@@ -1,6 +1,10 @@
 'use client';
 
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import {
+  QuietCard,
+  QuietCardContent,
+  SectionHeader,
+} from '@/components/system';
 
 interface ReferenceKeyFindingsProps {
   findings: string[];
@@ -12,26 +16,18 @@ export function ReferenceKeyFindings({ findings }: ReferenceKeyFindingsProps) {
   }
 
   return (
-    <Card variant="static">
-      <CardHeader className="pb-3">
-        <CardTitle className="text-[0.8125rem] font-medium text-muted-foreground">
-          Principais observações
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+    <QuietCard>
+      <SectionHeader title="Principais pontos" size="small" />
+      <QuietCardContent>
         <ul className="space-y-2.5">
           {findings.map((finding, index) => (
-            <li
-              key={index}
-              className="flex items-start gap-3"
-            >
-              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/40" />
-              <span className="font-serif text-[0.9375rem] leading-relaxed text-foreground">{finding}</span>
+            <li key={index} className="flex items-start gap-3">
+              <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-text-muted/40" />
+              <span className="text-body-sm text-text-secondary leading-relaxed">{finding}</span>
             </li>
           ))}
         </ul>
-      </CardContent>
-    </Card>
+      </QuietCardContent>
+    </QuietCard>
   );
 }
-

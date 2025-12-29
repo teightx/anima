@@ -1,7 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Card, CardContent } from '@/components/ui/card';
+import {
+  QuietCard,
+  QuietCardContent,
+  MetaRow,
+  MetaRowGroup,
+} from '@/components/system';
 import { Separator } from '@/components/ui/separator';
 import type { DailyCheckIn } from '@/server/contracts';
 import { formatDisplayDate } from '@/lib/appDate';
@@ -15,7 +20,7 @@ function getSleepQualityLabel(quality: string): string {
     poor: 'Ruim',
     fair: 'Regular',
     good: 'Boa',
-    excellent: 'Otima',
+    excellent: 'Ótima',
   };
   return labels[quality] || quality;
 }
@@ -25,11 +30,11 @@ export function HistoryList({ checkins }: HistoryListProps) {
 
   if (checkins.length === 0) {
     return (
-      <Card className="p-6">
-        <p className="text-sm text-muted-foreground text-center">
-          Nenhum registro encontrado no periodo.
+      <QuietCard>
+        <p className="text-body-sm text-text-muted text-center">
+          Nenhum registro encontrado no período.
         </p>
-      </Card>
+      </QuietCard>
     );
   }
 
@@ -38,38 +43,38 @@ export function HistoryList({ checkins }: HistoryListProps) {
   };
 
   return (
-    <Card>
-      <CardContent className="p-0">
+    <QuietCard padding="none">
+      <QuietCardContent>
         {checkins.map((checkin, index) => (
           <div key={checkin.id}>
             {index > 0 && <Separator />}
             <button
               type="button"
               onClick={() => handleClick(checkin.date)}
-              className="w-full p-4 text-left hover:bg-muted/50 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring"
+              className="w-full p-4 text-left hover:bg-surface-2/50 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring"
             >
               <div className="flex items-center justify-between">
-                <div className="space-y-1">
-                  <p className="text-sm font-medium">
+                <div className="space-y-1.5">
+                  <p className="text-body-sm font-medium text-text-primary">
                     {formatDisplayDate(checkin.date)}
                   </p>
-                  <div className="flex gap-4 text-xs text-muted-foreground">
-                    <span>Humor: {checkin.moodScore}/10</span>
-                    <span>Energia: {checkin.energyScore}/10</span>
+                  <MetaRowGroup>
+                    <MetaRow label="Humor" value={`${checkin.moodScore}/10`} />
+                    <MetaRow label="Energia" value={`${checkin.energyScore}/10`} />
                     {checkin.sleepHours && (
-                      <span>Sono: {checkin.sleepHours}h</span>
+                      <MetaRow label="Sono" value={`${checkin.sleepHours}h`} />
                     )}
-                  </div>
+                  </MetaRowGroup>
                 </div>
 
-                <div className="text-right text-xs text-muted-foreground">
+                <div className="text-caption text-text-muted">
                   {getSleepQualityLabel(checkin.sleepQuality)}
                 </div>
               </div>
             </button>
           </div>
         ))}
-      </CardContent>
-    </Card>
+      </QuietCardContent>
+    </QuietCard>
   );
 }

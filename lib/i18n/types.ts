@@ -7,35 +7,35 @@ export type Locale = 'pt' | 'en';
 export type DictionaryKey =
   // Navigation
   | 'nav.today'
-  | 'nav.history'
-  | 'nav.readings'
-  | 'nav.protocols'
-  | 'nav.anima'
-  | 'nav.dashboard'
+  | 'nav.records'
+  | 'nav.observations'
+  | 'nav.plans'
+  | 'nav.settings'
 
   // Page: Today
   | 'page.today.title'
   | 'page.today.subtitle'
 
-  // Page: History
-  | 'page.history.title'
-  | 'page.history.subtitle'
+  // Page: Records (antigo History + Dashboard)
+  | 'page.records.title'
+  | 'page.records.subtitle'
 
-  // Page: Readings
-  | 'page.readings.title'
-  | 'page.readings.subtitle'
+  // Page: Observations (antigo Readings)
+  | 'page.observations.title'
+  | 'page.observations.subtitle'
 
-  // Page: Protocols
-  | 'page.protocols.title'
-  | 'page.protocols.subtitle'
+  // Page: Plans (antigo Protocols)
+  | 'page.plans.title'
+  | 'page.plans.subtitle'
 
-  // Page: Anima
-  | 'page.anima.title'
-  | 'page.anima.subtitle'
+  // Page: Settings (antigo Ânima)
+  | 'page.settings.title'
+  | 'page.settings.subtitle'
 
-  // Page: Dashboard
-  | 'page.dashboard.title'
-  | 'page.dashboard.subtitle'
+  // Day Context (antigo Journal)
+  | 'dayContext.sectionTitle'
+  | 'dayContext.placeholder'
+  | 'dayContext.add'
 
   // References
   | 'references.title'
@@ -49,23 +49,25 @@ export type DictionaryKey =
   | 'references.back'
   | 'references.viewSource'
 
-  // Protocols
-  | 'protocols.start'
-  | 'protocols.inProgress'
-  | 'protocols.complete'
-  | 'protocols.empty'
-  | 'protocols.back'
-  | 'protocols.continue'
-  | 'protocols.taskCompleted'
+  // Plans (antigo Protocols)
+  | 'plans.start'
+  | 'plans.inProgress'
+  | 'plans.complete'
+  | 'plans.empty'
+  | 'plans.back'
+  | 'plans.continue'
+  | 'plans.taskCompleted'
+  | 'plans.disclaimer'
 
-  // Therapy
-  | 'therapy.status.active'
-  | 'therapy.status.inactive'
-  | 'therapy.activate'
-  | 'therapy.deactivate'
-  | 'therapy.sharing.title'
-  | 'therapy.preview.title'
-  | 'therapy.consent.notice'
+  // Sharing (antigo Therapy)
+  | 'sharing.title'
+  | 'sharing.status.active'
+  | 'sharing.status.inactive'
+  | 'sharing.activate'
+  | 'sharing.deactivate'
+  | 'sharing.dataTitle'
+  | 'sharing.preview.title'
+  | 'sharing.consent.notice'
 
   // Common
   | 'common.inDevelopment'
@@ -91,30 +93,31 @@ export type DictionaryKey =
   | 'feedback.loadError'
   | 'feedback.noData'
 
-  // Readings
-  | 'readings.tabs.all'
-  | 'readings.tabs.sleep'
-  | 'readings.tabs.stability'
-  | 'readings.tabs.routine'
-  | 'readings.tabs.consistency'
-  | 'readings.period.week'
-  | 'readings.period.month'
-  | 'readings.showHidden'
-  | 'readings.empty.title'
-  | 'readings.empty.body'
-  | 'readings.actions.useful'
-  | 'readings.actions.notApplicable'
-  | 'readings.actions.hide'
-  | 'readings.meta.confidence'
-  | 'readings.meta.severity'
-  | 'readings.meta.source'
+  // Observations (antigo Readings)
+  | 'observations.tabs.all'
+  | 'observations.tabs.sleep'
+  | 'observations.tabs.stability'
+  | 'observations.tabs.routine'
+  | 'observations.tabs.consistency'
+  | 'observations.period.week'
+  | 'observations.period.month'
+  | 'observations.showHidden'
+  | 'observations.empty.title'
+  | 'observations.empty.body'
+  | 'observations.actions.useful'
+  | 'observations.actions.notApplicable'
+  | 'observations.actions.hide'
+  | 'observations.meta.confidence'
+  | 'observations.meta.severity'
+  | 'observations.meta.source'
+  | 'observations.disclaimer'
 
   // Check-in
   | 'checkin.empty.title'
   | 'checkin.empty.body'
   | 'checkin.empty.cta'
 
-  // Journal
+  // Day Context (antigo Journal)
   | 'journal.sectionTitle'
   | 'journal.placeholder';
 

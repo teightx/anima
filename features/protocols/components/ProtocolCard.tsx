@@ -1,12 +1,14 @@
 'use client';
 
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card';
+  QuietCard,
+  QuietCardHeader,
+  QuietCardTitle,
+  QuietCardDescription,
+  QuietCardContent,
+  MetaRow,
+  MetaRowGroup,
+} from '@/components/system';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { Protocol, ProtocolRun } from '../types';
@@ -35,65 +37,62 @@ export function ProtocolCard({
   const progress = getProgressPercentage(protocol, activeRun);
 
   return (
-    <Card
+    <QuietCard
+      interactive
+      padding="none"
       className="cursor-pointer"
       onClick={onSelect}
     >
-      <CardHeader className="pb-3">
+      <QuietCardHeader className="p-5 pb-3">
         <div className="flex items-start justify-between gap-2">
-          <div className="space-y-1.5">
-            <CardTitle className="text-[0.9375rem]">{protocol.name}</CardTitle>
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="muted" className="text-[0.6875rem]">
-                {formatCategory(protocol.category)}
-              </Badge>
-              <span className="text-[0.6875rem] text-muted-foreground/70">
-                {formatDuration(protocol.durationDays)}
-              </span>
-            </div>
+          <div className="space-y-2">
+            <QuietCardTitle>{protocol.name}</QuietCardTitle>
+            <MetaRowGroup separator={false}>
+              <Badge variant="muted">{formatCategory(protocol.category)}</Badge>
+              <MetaRow label="" value={formatDuration(protocol.durationDays)} />
+            </MetaRowGroup>
           </div>
           {isActive && (
-            <Badge variant="outline" className="shrink-0 text-[0.6875rem]">
+            <Badge variant="outline" className="shrink-0">
               Em andamento
             </Badge>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        <CardDescription className="line-clamp-2 text-[0.8125rem]">
+      </QuietCardHeader>
+      <QuietCardContent className="px-5 pb-5 space-y-3">
+        <QuietCardDescription className="line-clamp-2">
           {protocol.description}
-        </CardDescription>
+        </QuietCardDescription>
 
         {isActive ? (
           <div className="space-y-2">
-            <div className="flex items-center justify-between text-[0.8125rem]">
-              <span className="text-muted-foreground">Progresso</span>
+            <div className="flex items-center justify-between text-body-sm">
+              <span className="text-text-muted">Progresso</span>
               <span className="font-medium tabular-nums">
                 {formatProgress(completedTasks, totalTasks)}
               </span>
             </div>
-            <div className="h-1 w-full rounded-full bg-muted">
+            <div className="h-1 w-full rounded-full bg-surface-2">
               <div
                 className="h-full rounded-full bg-primary/50 transition-all"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <Button variant="ghost" size="sm" className="w-full text-[0.8125rem]">
+            <Button variant="ghost" size="sm" className="w-full">
               Continuar
             </Button>
           </div>
         ) : (
           <div className="flex items-center justify-between">
-            <span className="text-[0.75rem] text-muted-foreground/70">
-              {totalTasks} etapas
+            <span className="text-caption text-text-muted">
+              {totalTasks} passos
             </span>
-            <Button variant="ghost" size="sm" className="text-[0.8125rem]">
+            <Button variant="ghost" size="sm">
               Ver detalhes
             </Button>
           </div>
         )}
-      </CardContent>
-    </Card>
+      </QuietCardContent>
+    </QuietCard>
   );
 }
-

@@ -1,6 +1,14 @@
 'use client';
 
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import {
+  QuietCard,
+  QuietCardHeader,
+  QuietCardTitle,
+  QuietCardDescription,
+  SectionHeader,
+  InlineNote,
+} from '@/components/system';
+import { EmptyState } from '@/components/feedback';
 import type { Protocol, ProtocolRun } from '../types';
 import { ProtocolCard } from './ProtocolCard';
 
@@ -26,14 +34,12 @@ export function ProtocolLibrary({
 
   if (protocols.length === 0) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Nenhum protocolo disponivel</CardTitle>
-          <CardDescription>
-            Novos protocolos serao adicionados em breve.
-          </CardDescription>
-        </CardHeader>
-      </Card>
+      <div className="page-stack">
+        <EmptyState
+          title="Nenhum plano ativo no momento"
+          description="Planos são estruturas opcionais de organização."
+        />
+      </div>
     );
   }
 
@@ -42,9 +48,7 @@ export function ProtocolLibrary({
       {/* Active protocols */}
       {activeProtocols.length > 0 && (
         <div className="space-y-3">
-          <h2 className="text-sm font-medium text-muted-foreground">
-            Em andamento
-          </h2>
+          <SectionHeader title="Em andamento" size="small" />
           <div className="grid gap-4 sm:grid-cols-2">
             {activeProtocols.map(protocol => (
               <ProtocolCard
@@ -63,9 +67,7 @@ export function ProtocolLibrary({
       {/* Available protocols */}
       {availableProtocols.length > 0 && (
         <div className="space-y-3">
-          <h2 className="text-sm font-medium text-muted-foreground">
-            Disponiveis
-          </h2>
+          <SectionHeader title="Disponíveis" size="small" />
           <div className="grid gap-4 sm:grid-cols-2">
             {availableProtocols.map(protocol => (
               <ProtocolCard
@@ -78,7 +80,11 @@ export function ProtocolLibrary({
           </div>
         </div>
       )}
+
+      {/* Disclaimer obrigatório */}
+      <InlineNote>
+        Planos são estruturas opcionais de organização. Não constituem tratamento ou recomendação.
+      </InlineNote>
     </div>
   );
 }
-

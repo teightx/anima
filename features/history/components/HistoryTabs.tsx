@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { Segmented, type SegmentedOption } from '@/components/system';
 import type { ViewMode } from '../types';
 
 interface HistoryTabsProps {
@@ -8,39 +8,18 @@ interface HistoryTabsProps {
   onViewChange: (view: ViewMode) => void;
 }
 
+const options: SegmentedOption<ViewMode>[] = [
+  { value: 'calendar', label: 'Calendário' },
+  { value: 'list', label: 'Lista' },
+];
+
 export function HistoryTabs({ activeView, onViewChange }: HistoryTabsProps) {
   return (
-    <div className="flex gap-1 p-1 bg-muted rounded-lg w-fit" role="tablist">
-      <button
-        type="button"
-        role="tab"
-        aria-selected={activeView === 'calendar'}
-        onClick={() => onViewChange('calendar')}
-        className={cn(
-          'px-4 py-2 text-sm font-medium rounded-md transition-colors',
-          'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
-          activeView === 'calendar'
-            ? 'bg-background text-foreground shadow-sm'
-            : 'text-muted-foreground hover:text-foreground'
-        )}
-      >
-        Calendario
-      </button>
-      <button
-        type="button"
-        role="tab"
-        aria-selected={activeView === 'list'}
-        onClick={() => onViewChange('list')}
-        className={cn(
-          'px-4 py-2 text-sm font-medium rounded-md transition-colors',
-          'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
-          activeView === 'list'
-            ? 'bg-background text-foreground shadow-sm'
-            : 'text-muted-foreground hover:text-foreground'
-        )}
-      >
-        Lista
-      </button>
-    </div>
+    <Segmented
+      options={options}
+      value={activeView}
+      onChange={onViewChange}
+      aria-label="Modo de visualização"
+    />
   );
 }

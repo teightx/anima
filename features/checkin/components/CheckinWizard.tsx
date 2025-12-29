@@ -1,7 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import {
+  QuietCard,
+  QuietCardContent,
+  QuietCardFooter,
+  InlineNote,
+} from '@/components/system';
 import { Button } from '@/components/ui/button';
 import { postJSON, type FetchOptions } from '@/lib/apiClient';
 import type { DailyCheckIn } from '@/server/contracts';
@@ -18,12 +23,28 @@ import { Step3Sleep } from './Step3Sleep';
 interface CheckinWizardProps {
   date: string;
   onSuccess: (checkin: DailyCheckIn) => void;
+  onCancel?: () => void;
   fetchOptions?: FetchOptions;
 }
 
+/**
+ * CheckinWizard — Registro rápido em 3 passos
+ * 
+ * Estrutura:
+ * 1. Núcleo: Humor, Energia, Tensão
+ * 2. Estrutura: Organização do dia
+ * 3. Sono: Duração, qualidade, ocorrências
+ * 
+ * Regras:
+ * - Cada passo cabe sem rolagem no mobile
+ * - Botões sempre na mesma posição (rodapé)
+ * - Progress discreto
+ * - Sem mensagens emocionais
+ */
 export function CheckinWizard({
   date,
   onSuccess,
+  onCancel,
   fetchOptions,
 }: CheckinWizardProps) {
   const [step, setStep] = useState<WizardStep>(1);
@@ -36,7 +57,9 @@ export function CheckinWizard({
   };
 
   const handleBack = () => {
-    if (step > 1) {
+    if (step === 1 && onCancel) {
+      onCancel();
+    } else if (step > 1) {
       setStep((step - 1) as WizardStep);
     }
   };
@@ -67,20 +90,26 @@ export function CheckinWizard({
     }
   };
 
+  const stepLabels = ['Núcleo', 'Estrutura', 'Sono'];
+
   return (
-    <Card>
-      <CardContent className="pt-6">
-        {/* Step indicator */}
-        <div className="flex items-center justify-center gap-2 mb-6">
-          {[1, 2, 3].map(s => (
-            <div
-              key={s}
-              className={`w-2 h-2 rounded-full transition-colors ${
-                s === step ? 'bg-primary' : 'bg-muted'
-              }`}
-            />
-          ))}
-          <span className="ml-2 text-xs text-muted-foreground">{step}/3</span>
+    <QuietCard padding="none">
+      <QuietCardContent className="p-5">
+        {/* Step indicator - discreto */}
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center gap-2">
+            {[1, 2, 3].map(s => (
+              <div
+                key={s}
+                className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                  s === step ? 'bg-primary' : s < step ? 'bg-primary/40' : 'bg-surface-2'
+                }`}
+              />
+            ))}
+          </div>
+          <span className="text-caption text-text-muted">
+            {step}/3 · {stepLabels[step - 1]}
+          </span>
         </div>
 
         {/* Step content */}
@@ -90,29 +119,29 @@ export function CheckinWizard({
 
         {/* Error message */}
         {error && (
-          <div className="mt-4 p-3 text-sm text-destructive bg-destructive/10 rounded-md">
-            {error}
+          <div className="mt-4">
+            <InlineNote>{error}</InlineNote>
           </div>
         )}
-      </CardContent>
+      </QuietCardContent>
 
-      <CardFooter className="flex justify-between border-t pt-4">
+      <QuietCardFooter className="flex justify-between border-t border-hairline px-5 py-4">
         <Button
           variant="ghost"
           onClick={handleBack}
-          disabled={step === 1 || isSubmitting}
+          disabled={isSubmitting}
         >
-          Voltar
+          {step === 1 && onCancel ? 'Cancelar' : 'Voltar'}
         </Button>
 
         {step < 3 ? (
-          <Button onClick={handleNext}>Avancar</Button>
+          <Button onClick={handleNext}>Avançar</Button>
         ) : (
           <Button onClick={handleSubmit} disabled={isSubmitting}>
-            {isSubmitting ? 'Registrando...' : 'Registrar'}
+            {isSubmitting ? 'Salvando...' : 'Salvar registro'}
           </Button>
         )}
-      </CardFooter>
-    </Card>
+      </QuietCardFooter>
+    </QuietCard>
   );
 }

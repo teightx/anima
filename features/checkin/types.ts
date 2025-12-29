@@ -46,11 +46,11 @@ export interface WizardState {
 export function formDataToPayload(data: CheckinFormData) {
   const symptoms: SymptomEntry[] = [];
 
-  // Add anxiety as symptom if above threshold
+  // Add tension as symptom if above threshold
   if (data.anxietyLevel > 5) {
     symptoms.push({
-      symptomId: 's-anxiety',
-      name: 'Ansiedade',
+      symptomId: 's-tension',
+      name: 'Tensão',
       severity: data.anxietyLevel > 7 ? 'high' : 'medium',
     });
   }

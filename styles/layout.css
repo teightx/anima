@@ -1,0 +1,83 @@
+/* ============================================================================
+   Ânima Design System v2 — Layout Tokens
+   ============================================================================
+   Grid, larguras e ritmo vertical para consistência em todas as telas.
+*/
+
+:root {
+  /* === Container Widths === */
+  --container-max-width: 56rem; /* 896px - confortável para leitura e gráficos */
+  --container-padding-x: 1.5rem; /* 24px mobile */
+  --container-padding-x-lg: 2rem; /* 32px desktop */
+
+  /* === Sidebar === */
+  --sidebar-width: 13.5rem; /* 216px */
+
+  /* === Vertical Rhythm === */
+  --page-gap: 2rem; /* 32px - entre PageHeader e conteúdo */
+  --section-gap: 1.5rem; /* 24px - entre seções/cards */
+  --content-gap: 1rem; /* 16px - dentro de seções */
+  --header-gap: 1.75rem; /* 28px - abaixo do PageHeader */
+
+  /* === Navigation === */
+  --nav-item-height: 2.5rem; /* 40px */
+  --nav-item-gap: 0.125rem; /* 2px */
+  --nav-active-border: 2px;
+}
+
+/* === Layout Utilities === */
+
+.container-app {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding-x);
+  padding-right: var(--container-padding-x);
+}
+
+@media (min-width: 1024px) {
+  .container-app {
+    padding-left: var(--container-padding-x-lg);
+    padding-right: var(--container-padding-x-lg);
+  }
+}
+
+/* === Vertical Rhythm Classes === */
+
+.page-gap {
+  margin-bottom: var(--page-gap);
+}
+
+.header-gap {
+  margin-bottom: var(--header-gap);
+}
+
+.section-gap {
+  margin-bottom: var(--section-gap);
+}
+
+.content-gap > * + * {
+  margin-top: var(--content-gap);
+}
+
+/* === Page Layout Stack === */
+
+.page-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.page-stack-compact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--content-gap);
+}
+
+.page-stack-spacious {
+  display: flex;
+  flex-direction: column;
+  gap: var(--page-gap);
+}
+

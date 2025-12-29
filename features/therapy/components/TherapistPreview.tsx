@@ -2,12 +2,13 @@
 
 import { User } from 'lucide-react';
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card';
+  QuietCard,
+  QuietCardHeader,
+  QuietCardTitle,
+  QuietCardDescription,
+  QuietCardContent,
+  InlineNote,
+} from '@/components/system';
 import { Badge } from '@/components/ui/badge';
 import type { DataCategory } from '../types';
 import { SHARING_CATEGORIES } from '../types';
@@ -27,37 +28,36 @@ export function TherapistPreview({
 
   if (!therapyEnabled) {
     return (
-      <Card className="border-dashed">
-        <CardHeader>
-          <CardTitle className="text-base">Visualizacao do profissional</CardTitle>
-          <CardDescription>
-            Ative o modo terapia para configurar o que sera visivel para
-            profissionais de saude.
-          </CardDescription>
-        </CardHeader>
-      </Card>
+      <QuietCard className="border-dashed">
+        <QuietCardHeader>
+          <QuietCardTitle>Visualização do profissional</QuietCardTitle>
+          <QuietCardDescription>
+            Ative o compartilhamento para configurar quais dados serão visíveis.
+          </QuietCardDescription>
+        </QuietCardHeader>
+      </QuietCard>
     );
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-base">Visualizacao do profissional</CardTitle>
-        <CardDescription>
-          Pre-visualizacao de como seus dados serao apresentados.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <QuietCard>
+      <QuietCardHeader>
+        <QuietCardTitle>Visualização do profissional</QuietCardTitle>
+        <QuietCardDescription>
+          Pré-visualização de como seus dados serão apresentados.
+        </QuietCardDescription>
+      </QuietCardHeader>
+      <QuietCardContent className="space-y-4">
         {/* Professional placeholder */}
-        <div className="flex items-center gap-3 rounded-lg bg-muted/50 p-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted">
-            <User className="h-5 w-5 text-muted-foreground" />
+        <div className="flex items-center gap-3 rounded-lg bg-surface-2 p-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-surface">
+            <User className="h-5 w-5 text-text-muted" />
           </div>
           <div>
-            <p className="text-sm font-medium text-foreground">
+            <p className="text-body-sm font-medium text-text-primary">
               Profissional vinculado
             </p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-caption text-text-muted">
               Nenhum profissional vinculado ainda
             </p>
           </div>
@@ -66,22 +66,22 @@ export function TherapistPreview({
         {/* Shared data preview */}
         {sharedCategories.length > 0 ? (
           <div className="space-y-3">
-            <p className="text-xs font-medium text-muted-foreground">
+            <p className="text-caption font-medium text-text-muted">
               Dados compartilhados
             </p>
             <div className="space-y-2">
               {sharedCategories.map(category => (
                 <div
                   key={category.key}
-                  className="rounded-lg border border-border/50 bg-muted/30 p-3"
+                  className="rounded-lg border border-hairline bg-surface-2/30 p-3"
                 >
                   <div className="flex items-center justify-between">
-                    <p className="text-sm text-foreground">{category.title}</p>
-                    <Badge variant="secondary" className="text-xs">
-                      Resumo
-                    </Badge>
+                    <p className="text-body-sm text-text-primary">
+                      {category.title}
+                    </p>
+                    <Badge variant="secondary">Resumo</Badge>
                   </div>
-                  <p className="mt-1 text-xs text-muted-foreground">
+                  <p className="mt-1 text-caption text-text-muted">
                     {getPreviewText(category.key)}
                   </p>
                 </div>
@@ -89,33 +89,30 @@ export function TherapistPreview({
             </div>
           </div>
         ) : (
-          <div className="rounded-lg border border-dashed border-border p-4 text-center">
-            <p className="text-sm text-muted-foreground">
-              Nenhuma categoria selecionada para compartilhamento
-            </p>
-          </div>
+          <InlineNote hideIcon>
+            Nenhuma categoria selecionada para compartilhamento
+          </InlineNote>
         )}
-      </CardContent>
-    </Card>
+      </QuietCardContent>
+    </QuietCard>
   );
 }
 
 function getPreviewText(category: DataCategory): string {
   switch (category) {
     case 'baseline':
-      return 'Informacoes gerais de perfil e historico de saude';
+      return 'Informações gerais de perfil e histórico';
     case 'check_ins':
-      return 'Medias de humor, energia e sono ao longo do tempo';
+      return 'Médias de humor, energia e sono ao longo do tempo';
     case 'journal_entries':
-      return 'Temas recorrentes e tendencias identificadas';
+      return 'Temas recorrentes e tendências identificadas';
     case 'readings':
-      return 'Lista de leituras recebidas e interacoes';
+      return 'Lista de observações recebidas e interações';
     case 'protocols':
-      return 'Protocolos em andamento e taxas de aderencia';
+      return 'Planos em andamento e taxas de aderência';
     case 'therapy_sessions':
-      return 'Quantidade de sessoes e temas abordados';
+      return 'Quantidade de sessões e temas abordados';
     default:
       return 'Dados agregados desta categoria';
   }
 }
-

@@ -1,12 +1,13 @@
 'use client';
 
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card';
+  QuietCard,
+  QuietCardHeader,
+  QuietCardTitle,
+  QuietCardDescription,
+  QuietCardContent,
+  MetaRow,
+} from '@/components/system';
 import type { DataCategory } from '../types';
 import { SHARING_CATEGORIES } from '../types';
 import { SharingCategoryToggle } from './SharingCategoryToggle';
@@ -29,24 +30,25 @@ export function SharingRulesPanel({
   const sharedCount = Object.values(enabledCategories).filter(Boolean).length;
 
   return (
-    <Card>
-      <CardHeader>
+    <QuietCard padding="none">
+      <QuietCardHeader className="p-5">
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-1">
-            <CardTitle className="text-base">Regras de compartilhamento</CardTitle>
-            <CardDescription>
-              Controle quais informacoes podem ser visualizadas por
-              profissionais autorizados.
-            </CardDescription>
+            <QuietCardTitle>Regras de compartilhamento</QuietCardTitle>
+            <QuietCardDescription>
+              Controle quais informações podem ser visualizadas por profissionais
+              autorizados.
+            </QuietCardDescription>
           </div>
           {sharedCount > 0 && (
-            <span className="text-xs text-muted-foreground">
-              {sharedCount} de {SHARING_CATEGORIES.length}
-            </span>
+            <MetaRow
+              label=""
+              value={`${sharedCount} de ${SHARING_CATEGORIES.length}`}
+            />
           )}
         </div>
-      </CardHeader>
-      <CardContent>
+      </QuietCardHeader>
+      <QuietCardContent className="px-5 pb-5">
         <div className="space-y-3">
           {SHARING_CATEGORIES.map(category => (
             <SharingCategoryToggle
@@ -58,8 +60,7 @@ export function SharingRulesPanel({
             />
           ))}
         </div>
-      </CardContent>
-    </Card>
+      </QuietCardContent>
+    </QuietCard>
   );
 }
-

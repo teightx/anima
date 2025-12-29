@@ -2,7 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import {
+  QuietCard,
+  QuietCardContent,
+  QuietCardHeader,
+} from '@/components/system';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { CheckinMap } from '../types';
@@ -58,38 +62,38 @@ export function HistoryCalendar({ checkins, asOf }: HistoryCalendarProps) {
   const isToday = (date: string) => date === asOf;
 
   return (
-    <Card>
-      <CardHeader className="pb-2">
+    <QuietCard padding="none">
+      <QuietCardHeader className="p-5 pb-2">
         <div className="flex items-center justify-between">
           <Button
             variant="ghost"
             size="icon"
             onClick={handlePrevMonth}
-            aria-label="Mes anterior"
+            aria-label="Mês anterior"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
 
-          <span className="text-sm font-medium capitalize">{monthLabel}</span>
+          <span className="text-body-sm font-medium capitalize">{monthLabel}</span>
 
           <Button
             variant="ghost"
             size="icon"
             onClick={handleNextMonth}
-            aria-label="Proximo mes"
+            aria-label="Próximo mês"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
-      </CardHeader>
+      </QuietCardHeader>
 
-      <CardContent>
+      <QuietCardContent className="px-5 pb-5">
         {/* Weekday headers */}
         <div className="grid grid-cols-7 gap-1 mb-2">
           {WEEKDAYS.map(day => (
             <div
               key={day}
-              className="text-center text-xs text-muted-foreground py-1"
+              className="text-center text-caption text-text-muted py-1"
             >
               {day}
             </div>
@@ -115,7 +119,7 @@ export function HistoryCalendar({ checkins, asOf }: HistoryCalendarProps) {
             />
           ))}
         </div>
-      </CardContent>
-    </Card>
+      </QuietCardContent>
+    </QuietCard>
   );
 }

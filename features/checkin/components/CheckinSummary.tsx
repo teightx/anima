@@ -1,13 +1,21 @@
 'use client';
 
 import type { DailyCheckIn } from '@/server/contracts';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import {
+  QuietCard,
+  QuietCardHeader,
+  QuietCardTitle,
+  QuietCardContent,
+  MetaRow,
+  MetaRowGroup,
+} from '@/components/system';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 
 interface CheckinSummaryProps {
   checkin: DailyCheckIn;
-  dateLabel: string;
+  onEdit?: () => void;
 }
 
 function MetricDisplay({
@@ -23,13 +31,13 @@ function MetricDisplay({
 
   return (
     <div className="space-y-1.5">
-      <div className="flex items-center justify-between text-[0.8125rem]">
-        <span className="text-muted-foreground">{label}</span>
-        <span className="font-medium tabular-nums text-foreground">
+      <div className="flex items-center justify-between text-body-sm">
+        <span className="text-text-muted">{label}</span>
+        <span className="font-medium tabular-nums text-text-primary">
           {value}
         </span>
       </div>
-      <div className="h-1 bg-muted rounded-full overflow-hidden">
+      <div className="h-1 bg-surface-2 rounded-full overflow-hidden">
         <div
           className="h-full bg-primary/50 rounded-full transition-all"
           style={{ width: `${percentage}%` }}
@@ -49,60 +57,54 @@ function getSleepQualityLabel(quality: string): string {
   return labels[quality] || quality;
 }
 
-export function CheckinSummary({ checkin, dateLabel }: CheckinSummaryProps) {
+export function CheckinSummary({ checkin, onEdit }: CheckinSummaryProps) {
   return (
-    <Card variant="static">
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-[0.9375rem] font-medium">
-            Registro do dia
-          </CardTitle>
-          <Badge variant="muted" className="text-[0.6875rem]">
-            {dateLabel}
-          </Badge>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <QuietCard>
+      <QuietCardHeader className="flex flex-row items-center justify-between pb-3">
+        <QuietCardTitle>Registro do dia</QuietCardTitle>
+        {onEdit && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onEdit}
+            className="text-text-muted"
+          >
+            Editar
+          </Button>
+        )}
+      </QuietCardHeader>
+      <QuietCardContent className="space-y-4">
         {/* Main metrics */}
         <div className="space-y-3">
           <MetricDisplay label="Humor" value={checkin.moodScore} />
           <MetricDisplay label="Energia" value={checkin.energyScore} />
         </div>
 
-        <Separator className="bg-border/40" />
+        <Separator />
 
         {/* Sleep info */}
-        <div className="grid grid-cols-2 gap-4 text-[0.8125rem]">
-          <div className="space-y-0.5">
-            <span className="text-muted-foreground">Sono</span>
-            <p className="font-medium">
-              {checkin.sleepHours ? `${checkin.sleepHours}h` : '-'}
-            </p>
-          </div>
-          <div className="space-y-0.5">
-            <span className="text-muted-foreground">Qualidade</span>
-            <p className="font-medium">
-              {getSleepQualityLabel(checkin.sleepQuality)}
-            </p>
-          </div>
-        </div>
+        <MetaRowGroup direction="horizontal">
+          <MetaRow
+            label="Sono"
+            value={checkin.sleepHours ? `${checkin.sleepHours}h` : '-'}
+          />
+          <MetaRow
+            label="Qualidade"
+            value={getSleepQualityLabel(checkin.sleepQuality)}
+          />
+        </MetaRowGroup>
 
         {/* Symptoms */}
         {checkin.symptoms && checkin.symptoms.length > 0 && (
           <>
-            <Separator className="bg-border/40" />
+            <Separator />
             <div className="space-y-2">
-              <span className="text-[0.8125rem] text-muted-foreground">
-                Ocorrências
-              </span>
+              <span className="text-body-sm text-text-muted">Ocorrências</span>
               <div className="flex flex-wrap gap-1.5">
                 {checkin.symptoms.map(symptom => (
                   <Badge
                     key={symptom.symptomId}
-                    variant={
-                      symptom.severity === 'high' ? 'destructive' : 'muted'
-                    }
-                    className="text-[0.6875rem]"
+                    variant={symptom.severity === 'high' ? 'destructive' : 'muted'}
                   >
                     {symptom.name}
                   </Badge>
@@ -115,14 +117,16 @@ export function CheckinSummary({ checkin, dateLabel }: CheckinSummaryProps) {
         {/* Notes */}
         {checkin.notes && (
           <>
-            <Separator className="bg-border/40" />
+            <Separator />
             <div className="space-y-1.5">
-              <span className="text-[0.8125rem] text-muted-foreground">Observações</span>
-              <p className="text-[0.8125rem] leading-relaxed">{checkin.notes}</p>
+              <span className="text-body-sm text-text-muted">Observações</span>
+              <p className="text-body-sm leading-relaxed text-text-primary">
+                {checkin.notes}
+              </p>
             </div>
           </>
         )}
-      </CardContent>
-    </Card>
+      </QuietCardContent>
+    </QuietCard>
   );
 }

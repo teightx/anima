@@ -16,12 +16,18 @@ const SLEEP_QUALITIES: { value: SleepQuality; label: string }[] = [
   { value: 'excellent', label: 'Ótimo' },
 ];
 
+/**
+ * Step3Sleep — Sono e ocorrências
+ * 
+ * Campos: Duração, qualidade, ocorrências, observações
+ * Linguagem neutra e descritiva
+ */
 export function Step3Sleep({ data, onChange }: Step3SleepProps) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <div className="space-y-1">
-        <h3 className="text-base font-medium">Sono e ocorrências</h3>
-        <p className="text-sm text-muted-foreground">
+        <h3 className="text-h4">Sono e ocorrências</h3>
+        <p className="text-body-sm text-text-muted">
           Dados sobre descanso e eventos observados.
         </p>
       </div>
@@ -31,7 +37,7 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
         <div className="space-y-2">
           <label
             htmlFor="sleep-hours"
-            className="text-sm text-muted-foreground"
+            className="text-body-sm text-text-muted"
           >
             Duração do sono
           </label>
@@ -44,20 +50,20 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
               step={0.5}
               value={data.sleepHours}
               onChange={e => onChange({ sleepHours: Number(e.target.value) })}
-              className="w-20 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring/40"
+              className="w-20 px-3 py-2 text-body-sm border border-hairline bg-surface rounded-lg focus:outline-none focus:ring-2 focus:ring-ring/40 focus:border-border"
               aria-describedby="sleep-hours-hint"
             />
-            <span className="text-sm text-muted-foreground">horas</span>
+            <span className="text-body-sm text-text-muted">horas</span>
           </div>
         </div>
 
         {/* Sleep quality */}
         <div className="space-y-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-body-sm text-text-muted">
             Qualidade percebida
           </span>
           <div
-            className="flex gap-1.5"
+            className="grid grid-cols-4 gap-1.5"
             role="radiogroup"
             aria-label="Qualidade do sono"
           >
@@ -69,11 +75,11 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
                 aria-checked={data.sleepQuality === value}
                 onClick={() => onChange({ sleepQuality: value })}
                 className={cn(
-                  'flex-1 px-2.5 py-2 text-[0.8125rem] rounded-md border transition-colors',
-                  'focus:outline-none focus:ring-2 focus:ring-ring/40 focus:ring-offset-2',
+                  'px-2 py-2 text-body-sm rounded-lg border transition-colors',
+                  'focus:outline-none focus:ring-2 focus:ring-ring/40 focus:ring-offset-1',
                   data.sleepQuality === value
-                    ? 'bg-secondary text-secondary-foreground border-secondary'
-                    : 'bg-background border-input hover:bg-muted/50'
+                    ? 'bg-surface-2 text-text-primary border-border'
+                    : 'bg-surface border-hairline hover:bg-surface-2/50 text-text-muted'
                 )}
               >
                 {label}
@@ -82,9 +88,9 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
           </div>
         </div>
 
-        {/* Events */}
-        <div className="space-y-3 pt-4 border-t border-border/50">
-          <span className="text-sm text-muted-foreground">
+        {/* Ocorrências */}
+        <div className="space-y-3 pt-3 border-t border-hairline">
+          <span className="text-body-sm text-text-muted">
             Ocorrências
           </span>
 
@@ -94,9 +100,9 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
                 type="checkbox"
                 checked={data.hadImpulse}
                 onChange={e => onChange({ hadImpulse: e.target.checked })}
-                className="w-4 h-4 mt-0.5 rounded border-input text-primary focus:ring-ring/40"
+                className="w-4 h-4 mt-0.5 rounded border-hairline text-primary focus:ring-ring/40"
               />
-              <span className="text-sm text-foreground leading-snug">
+              <span className="text-body-sm text-text-primary leading-snug">
                 Impulso ou urgência atípica
               </span>
             </label>
@@ -106,9 +112,9 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
                 type="checkbox"
                 checked={data.hadCrisis}
                 onChange={e => onChange({ hadCrisis: e.target.checked })}
-                className="w-4 h-4 mt-0.5 rounded border-input text-primary focus:ring-ring/40"
+                className="w-4 h-4 mt-0.5 rounded border-hairline text-primary focus:ring-ring/40"
               />
-              <span className="text-sm text-foreground leading-snug">
+              <span className="text-body-sm text-text-primary leading-snug">
                 Episódio de instabilidade
               </span>
             </label>
@@ -119,7 +125,7 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
         <div className="space-y-2">
           <label
             htmlFor="notes"
-            className="text-sm text-muted-foreground"
+            className="text-body-sm text-text-muted"
           >
             Observações
           </label>
@@ -128,8 +134,8 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
             value={data.notes}
             onChange={e => onChange({ notes: e.target.value })}
             placeholder="Contexto adicional, se relevante..."
-            rows={3}
-            className="w-full px-3 py-2 text-sm border border-input bg-background rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-ring/40"
+            rows={2}
+            className="w-full px-3 py-2.5 text-body-sm border border-hairline bg-surface rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-ring/40 focus:border-border placeholder:text-text-muted/60"
           />
         </div>
       </div>

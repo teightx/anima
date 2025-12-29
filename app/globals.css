@@ -1,140 +1,38 @@
 @import 'tailwindcss';
+@import '../styles/tokens.css';
+@import '../styles/typography.css';
+@import '../styles/layout.css';
+
+/* ============================================================================
+   Global Layout Fixes
+   ============================================================================ */
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
 
 /*
- * Ânima Design System v1
- * Identidade institucional, humana e de longo prazo
+ * Ânima Design System v2
+ * =====================
  * 
- * Paleta: desaturada com viés azul (blue light filter)
- * Sem verde, roxo ou neon como cores principais
- * Contraste AA mínimo garantido
+ * Identidade visual: institucional, longeva, produto próprio
  * 
- * Fontes carregadas via layout.tsx:
- * - Inter: UI base
- * - Source Serif 4: conteúdo editorial
+ * Paleta:
+ * - Light: "Porcelana fria" (off-white material)
+ * - Dark: "Ink azul" (azul profundo, não preto)
+ * - Primary: azul mineral discreto
+ * 
+ * Tipografia:
+ * - Sans (Inter): UI, navegação, botões, labels
+ * - Serif (Source Serif 4): Observações, referências
+ * 
+ * Contraste: AA mínimo garantido
+ * Bordas: hairline (quase invisíveis)
+ * Sombras: máximo 1 sombra suave
  */
-
-/* ============================================================================
-   Design Tokens - Light Mode
-   ============================================================================ */
-
-:root {
-  /* Background - off-white frio */
-  --background: 210 30% 97%;
-  --foreground: 215 22% 18%;
-
-  /* Card/Surface */
-  --card: 210 28% 99%;
-  --card-foreground: 215 22% 18%;
-
-  /* Popover */
-  --popover: 210 28% 99%;
-  --popover-foreground: 215 22% 18%;
-
-  /* Primary - azul acinzentado discreto */
-  --primary: 205 28% 52%;
-  --primary-foreground: 210 30% 98%;
-
-  /* Secondary */
-  --secondary: 210 20% 94%;
-  --secondary-foreground: 215 18% 24%;
-
-  /* Muted */
-  --muted: 210 18% 93%;
-  --muted-foreground: 215 15% 38%;
-
-  /* Accent - azul discreto */
-  --accent: 205 18% 90%;
-  --accent-foreground: 215 22% 18%;
-
-  /* Destructive */
-  --destructive: 0 50% 45%;
-  --destructive-foreground: 210 30% 98%;
-
-  /* Border */
-  --border: 214 18% 88%;
-
-  /* Input */
-  --input: 214 18% 88%;
-
-  /* Ring */
-  --ring: 205 28% 52%;
-
-  /* Radius */
-  --radius: 0.625rem;
-
-  /* Shadow tokens - mais suaves */
-  --shadow-color: 214 25% 50%;
-  --shadow-xs: 0 1px 2px 0 hsl(var(--shadow-color) / 0.03);
-  --shadow-sm: 0 1px 3px 0 hsl(var(--shadow-color) / 0.04);
-  --shadow-md:
-    0 2px 6px -1px hsl(var(--shadow-color) / 0.05),
-    0 1px 3px -1px hsl(var(--shadow-color) / 0.03);
-  --shadow-lg:
-    0 4px 12px -2px hsl(var(--shadow-color) / 0.06),
-    0 2px 4px -1px hsl(var(--shadow-color) / 0.03);
-
-  /* Typography */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-}
-
-/* ============================================================================
-   Design Tokens - Dark Mode
-   ============================================================================ */
-
-.dark {
-  /* Background - cinza azulado profundo */
-  --background: 220 18% 9%;
-  --foreground: 210 20% 92%;
-
-  /* Card/Surface */
-  --card: 220 16% 12%;
-  --card-foreground: 210 20% 92%;
-
-  /* Popover */
-  --popover: 220 16% 12%;
-  --popover-foreground: 210 20% 92%;
-
-  /* Primary - azul acinzentado (mais claro para dark) */
-  --primary: 205 28% 58%;
-  --primary-foreground: 220 18% 9%;
-
-  /* Secondary */
-  --secondary: 220 14% 16%;
-  --secondary-foreground: 210 18% 88%;
-
-  /* Muted */
-  --muted: 220 14% 16%;
-  --muted-foreground: 210 12% 68%;
-
-  /* Accent */
-  --accent: 220 14% 16%;
-  --accent-foreground: 210 20% 92%;
-
-  /* Destructive */
-  --destructive: 0 45% 50%;
-  --destructive-foreground: 210 20% 92%;
-
-  /* Border */
-  --border: 220 12% 18%;
-
-  /* Input */
-  --input: 220 12% 18%;
-
-  /* Ring */
-  --ring: 205 28% 58%;
-
-  /* Shadow tokens - dark mode */
-  --shadow-color: 220 40% 6%;
-  --shadow-xs: 0 1px 2px 0 hsl(var(--shadow-color) / 0.15);
-  --shadow-sm: 0 1px 3px 0 hsl(var(--shadow-color) / 0.2);
-  --shadow-md:
-    0 2px 6px -1px hsl(var(--shadow-color) / 0.25),
-    0 1px 3px -1px hsl(var(--shadow-color) / 0.1);
-  --shadow-lg:
-    0 4px 12px -2px hsl(var(--shadow-color) / 0.3),
-    0 2px 4px -1px hsl(var(--shadow-color) / 0.15);
-}
 
 /* ============================================================================
    Tailwind Theme Integration
@@ -160,10 +58,30 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Semantic colors */
+  --color-surface: hsl(var(--surface));
+  --color-surface-2: hsl(var(--surface-2));
+  --color-text-primary: hsl(var(--text-primary));
+  --color-text-secondary: hsl(var(--text-secondary));
+  --color-text-muted: hsl(var(--text-muted));
+  --color-hairline: hsl(var(--hairline));
+  --color-primary-muted: hsl(var(--primary-muted));
+  --color-primary-muted-foreground: hsl(var(--primary-muted-foreground));
+  --color-danger-muted: hsl(var(--danger-muted));
+  --color-danger-muted-foreground: hsl(var(--danger-muted-foreground));
+  --color-success-muted: hsl(var(--success-muted));
+  --color-success-muted-foreground: hsl(var(--success-muted-foreground));
+  --color-warning-muted: hsl(var(--warning-muted));
+  --color-warning-muted-foreground: hsl(var(--warning-muted-foreground));
+  
+  /* Radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  
+  /* Typography */
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
 }
@@ -173,12 +91,12 @@
    ============================================================================ */
 
 * {
-  border-color: hsl(var(--border));
+  border-color: hsl(var(--hairline));
 }
 
 body {
   background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
+  color: hsl(var(--text-primary));
   font-family: var(--font-sans);
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   -webkit-font-smoothing: antialiased;
@@ -187,175 +105,138 @@ body {
 }
 
 /* ============================================================================
-   Atmosfera - Background com gradiente sutil e grain
+   Atmosfera - Background com textura sutil
    ============================================================================ */
 
-/* Light mode - gradiente radial muito sutil */
+/* Light mode - gradiente radial suave */
 :root body {
   background-image:
-    /* Grain discreto (3%) */
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"),
-    /* Gradiente radial superior */
+    /* Grain discreto (2.5%) */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E"),
+    /* Gradiente radial superior - azul mineral sutil */
     radial-gradient(
-      ellipse 1000px 600px at 15% -5%,
-      hsl(205 28% 52% / 0.06),
-      transparent 60%
-    ),
-    /* Gradiente linear de profundidade */
-    linear-gradient(
-      175deg,
-      hsl(205 28% 52% / 0.03) 0%,
-      transparent 30%
-    );
-  background-attachment: fixed;
-}
-
-/* Dark mode - gradiente mais pronunciado */
-.dark body {
-  background-image:
-    /* Grain discreto (4%) */
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"),
-    /* Gradiente radial superior */
-    radial-gradient(
-      ellipse 900px 500px at 10% -8%,
-      hsl(205 28% 58% / 0.08),
+      ellipse 900px 500px at 5% -10%,
+      hsl(210 32% 42% / 0.04),
       transparent 55%
     ),
-    /* Gradiente secundário */
+    /* Gradiente de profundidade */
+    linear-gradient(
+      178deg,
+      hsl(45 20% 95% / 0.5) 0%,
+      transparent 25%
+    );
+  background-attachment: fixed;
+}
+
+/* Dark mode - profundidade azul */
+.dark body {
+  background-image:
+    /* Grain sutil (3.5%) */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E"),
+    /* Gradiente radial superior */
     radial-gradient(
-      ellipse 600px 400px at 90% 100%,
-      hsl(220 20% 20% / 0.4),
-      transparent 60%
+      ellipse 800px 450px at 8% -12%,
+      hsl(210 35% 55% / 0.06),
+      transparent 50%
+    ),
+    /* Gradiente inferior profundo */
+    radial-gradient(
+      ellipse 700px 400px at 95% 105%,
+      hsl(222 30% 12% / 0.5),
+      transparent 55%
     );
   background-attachment: fixed;
 }
 
 /* ============================================================================
-   Typography - Hierarquia clara
-   ============================================================================ */
-
-h1, .h1 {
-  font-family: var(--font-sans);
-  font-size: 1.75rem;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  color: hsl(var(--foreground));
-}
-
-h2, .h2 {
-  font-family: var(--font-sans);
-  font-size: 1.375rem;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
-  color: hsl(var(--foreground));
-}
-
-h3, .h3 {
-  font-family: var(--font-sans);
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
-  color: hsl(var(--foreground));
-}
-
-h4, .h4 {
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5;
-  color: hsl(var(--foreground));
-}
-
-/* Typography - Serif para conteúdo editorial */
-.font-serif {
-  font-family: var(--font-serif);
-}
-
-.prose-reading {
-  font-family: var(--font-serif);
-  font-size: 1.0625rem;
-  line-height: 1.8;
-  color: hsl(var(--foreground));
-  letter-spacing: 0.005em;
-}
-
-.prose-reading p {
-  margin-bottom: 1.25em;
-}
-
-.prose-reading p:last-child {
-  margin-bottom: 0;
-}
-
-.prose-reading strong {
-  font-weight: 600;
-}
-
-/* Editorial - para estudos e fontes */
-.prose-editorial {
-  font-family: var(--font-serif);
-  font-size: 0.9375rem;
-  line-height: 1.7;
-  color: hsl(var(--foreground));
-  letter-spacing: 0.008em;
-}
-
-.prose-editorial p {
-  margin-bottom: 1em;
-}
-
-.prose-editorial p:last-child {
-  margin-bottom: 0;
-}
-
-/* Captions e notas editoriais */
-.text-editorial-caption {
-  font-family: var(--font-serif);
-  font-size: 0.8125rem;
-  font-style: italic;
-  color: hsl(var(--muted-foreground));
-  line-height: 1.6;
-}
-
-/* ============================================================================
-   Card - Mais espaço, menos sombra
+   Card - Material consistente
    ============================================================================ */
 
 [data-slot='card'],
 .card-base {
-  box-shadow: var(--shadow-sm);
-  border-color: hsl(var(--border) / 0.5);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  background-color: hsl(var(--surface));
+  box-shadow: var(--shadow-subtle);
+  border: 1px solid hsl(var(--hairline));
+  transition: 
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
 }
 
 [data-slot='card']:hover,
 .card-base:hover {
-  box-shadow: var(--shadow-md);
-  border-color: hsl(var(--border) / 0.7);
+  box-shadow: var(--shadow-soft);
+  border-color: hsl(var(--border));
 }
 
 /* Card sem hover (para cards estáticos) */
-.card-static {
-  box-shadow: var(--shadow-xs);
-  border-color: hsl(var(--border) / 0.4);
+.card-static,
+[data-slot='card'][data-variant='static'] {
+  box-shadow: var(--shadow-subtle);
+  border-color: hsl(var(--hairline));
 }
 
-.card-static:hover {
-  box-shadow: var(--shadow-xs);
-  border-color: hsl(var(--border) / 0.4);
+.card-static:hover,
+[data-slot='card'][data-variant='static']:hover {
+  box-shadow: var(--shadow-subtle);
+  border-color: hsl(var(--hairline));
 }
 
 /* ============================================================================
-   Badges - Mais discretos
+   Badges - Discretos e consistentes
    ============================================================================ */
 
 [data-slot='badge'] {
   font-weight: 500;
-  font-size: 0.75rem;
-  letter-spacing: 0.01em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Badge default usa primary-muted */
+[data-slot='badge'][data-variant='default'] {
+  background-color: hsl(var(--primary-muted));
+  color: hsl(var(--primary-muted-foreground));
+}
+
+/* Badge secondary usa surface-2 */
+[data-slot='badge'][data-variant='secondary'] {
+  background-color: hsl(var(--surface-2));
+  color: hsl(var(--text-secondary));
+}
+
+/* ============================================================================
+   Buttons - Refinados
+   ============================================================================ */
+
+button,
+[role='button'] {
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+
+/* Primary button */
+[data-slot='button'][data-variant='default'],
+.btn-primary {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  transition: background-color var(--transition-fast);
+}
+
+[data-slot='button'][data-variant='default']:hover,
+.btn-primary:hover {
+  background-color: hsl(var(--primary-hover));
+}
+
+/* Ghost/outline buttons */
+[data-slot='button'][data-variant='ghost'],
+[data-slot='button'][data-variant='outline'] {
+  color: hsl(var(--text-secondary));
+}
+
+[data-slot='button'][data-variant='ghost']:hover,
+[data-slot='button'][data-variant='outline']:hover {
+  background-color: hsl(var(--surface-2));
+  color: hsl(var(--text-primary));
 }
 
 /* ============================================================================
@@ -363,35 +244,35 @@ h4, .h4 {
    ============================================================================ */
 
 [role='tablist'] {
-  background-color: hsl(var(--muted) / 0.4);
-  border-radius: var(--radius);
+  background-color: hsl(var(--surface-2) / 0.6);
+  border-radius: var(--radius-md);
   padding: 0.25rem;
 }
 
 [role='tab'] {
   font-weight: 500;
   font-size: 0.875rem;
-  transition: all 0.15s ease;
-  color: hsl(var(--muted-foreground));
+  transition: all var(--transition-fast);
+  color: hsl(var(--text-muted));
 }
 
 [role='tab']:hover:not([data-state='active']) {
-  color: hsl(var(--foreground));
+  color: hsl(var(--text-secondary));
 }
 
 [role='tab'][data-state='active'] {
-  background-color: hsl(var(--card));
-  color: hsl(var(--foreground));
-  box-shadow: var(--shadow-xs);
+  background-color: hsl(var(--surface));
+  color: hsl(var(--text-primary));
+  box-shadow: var(--shadow-subtle);
 }
 
-/* Toggle Group mais discreto */
+/* Toggle Group discreto */
 .toggle-group-subtle [data-state='on'] {
-  background-color: hsl(var(--secondary));
-  color: hsl(var(--foreground));
+  background-color: hsl(var(--surface));
+  color: hsl(var(--text-primary));
 }
 
-/* Tab pills customizadas - para CategoryTabs etc. */
+/* Tab pills customizadas */
 .tab-pill {
   display: inline-flex;
   align-items: center;
@@ -399,29 +280,21 @@ h4, .h4 {
   padding: 0.375rem 0.75rem;
   font-size: 0.8125rem;
   font-weight: 500;
-  border-radius: calc(var(--radius) - 2px);
-  transition: all 0.15s ease;
-  color: hsl(var(--muted-foreground));
-  background-color: hsl(var(--muted) / 0.5);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  color: hsl(var(--text-muted));
+  background-color: hsl(var(--surface-2) / 0.5);
 }
 
 .tab-pill:hover:not(.tab-pill-active) {
-  background-color: hsl(var(--muted) / 0.7);
-  color: hsl(var(--foreground));
+  background-color: hsl(var(--surface-2));
+  color: hsl(var(--text-secondary));
 }
 
 .tab-pill-active {
-  background-color: hsl(var(--secondary));
-  color: hsl(var(--secondary-foreground));
-}
-
-/* ============================================================================
-   Buttons - Refinados
-   ============================================================================ */
-
-button, [role='button'] {
-  font-weight: 500;
-  letter-spacing: 0.005em;
+  background-color: hsl(var(--surface));
+  color: hsl(var(--text-primary));
+  box-shadow: var(--shadow-subtle);
 }
 
 /* ============================================================================
@@ -429,7 +302,7 @@ button, [role='button'] {
    ============================================================================ */
 
 :focus-visible {
-  outline: 2px solid hsl(var(--ring) / 0.4);
+  outline: 2px solid hsl(var(--ring) / 0.35);
   outline-offset: 2px;
 }
 
@@ -447,12 +320,12 @@ button, [role='button'] {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.2);
+  background: hsl(var(--text-muted) / 0.18);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.35);
+  background: hsl(var(--text-muted) / 0.28);
 }
 
 /* ============================================================================
@@ -461,11 +334,11 @@ button, [role='button'] {
 
 ::selection {
   background: hsl(var(--primary) / 0.12);
-  color: hsl(var(--foreground));
+  color: hsl(var(--text-primary));
 }
 
 .dark ::selection {
-  background: hsl(var(--primary) / 0.2);
+  background: hsl(var(--primary) / 0.18);
 }
 
 /* ============================================================================
@@ -486,24 +359,17 @@ button, [role='button'] {
 
 .recharts-cartesian-axis-tick-value {
   font-size: 0.75rem !important;
-  fill: hsl(var(--muted-foreground)) !important;
+  fill: hsl(var(--text-muted)) !important;
 }
 
 .recharts-legend-item-text {
   font-size: 0.8125rem !important;
-  color: hsl(var(--muted-foreground)) !important;
+  color: hsl(var(--text-muted)) !important;
 }
 
 /* ============================================================================
-   Sliders - Discretos e elegantes
+   Sliders - Discretos
    ============================================================================ */
-
-[role='slider'] {
-  --slider-track-bg: hsl(var(--muted));
-  --slider-range-bg: hsl(var(--primary) / 0.5);
-  --slider-thumb-bg: hsl(var(--card));
-  --slider-thumb-border: hsl(var(--border));
-}
 
 input[type='range'] {
   -webkit-appearance: none;
@@ -514,7 +380,7 @@ input[type='range'] {
 }
 
 input[type='range']::-webkit-slider-runnable-track {
-  background: hsl(var(--muted));
+  background: hsl(var(--surface-2));
   height: 0.375rem;
   border-radius: 9999px;
 }
@@ -525,11 +391,11 @@ input[type='range']::-webkit-slider-thumb {
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background: hsl(var(--card));
+  background: hsl(var(--surface));
   border: 1.5px solid hsl(var(--border));
   margin-top: -0.3125rem;
-  box-shadow: 0 1px 3px hsl(var(--shadow-color) / 0.1);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: var(--shadow-subtle);
+  transition: border-color var(--transition-fast);
 }
 
 input[type='range']:hover::-webkit-slider-thumb {
@@ -537,12 +403,12 @@ input[type='range']:hover::-webkit-slider-thumb {
 }
 
 input[type='range']:focus-visible::-webkit-slider-thumb {
-  outline: 2px solid hsl(var(--ring) / 0.4);
+  outline: 2px solid hsl(var(--ring) / 0.35);
   outline-offset: 2px;
 }
 
 input[type='range']::-moz-range-track {
-  background: hsl(var(--muted));
+  background: hsl(var(--surface-2));
   height: 0.375rem;
   border-radius: 9999px;
 }
@@ -551,15 +417,46 @@ input[type='range']::-moz-range-thumb {
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background: hsl(var(--card));
+  background: hsl(var(--surface));
   border: 1.5px solid hsl(var(--border));
-  box-shadow: 0 1px 3px hsl(var(--shadow-color) / 0.1);
+  box-shadow: var(--shadow-subtle);
 }
 
 input[type='range']::-moz-range-progress {
-  background: hsl(var(--primary) / 0.4);
+  background: hsl(var(--primary) / 0.35);
   height: 0.375rem;
   border-radius: 9999px;
+}
+
+/* ============================================================================
+   Inputs
+   ============================================================================ */
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+input[type='search'],
+input[type='tel'],
+input[type='url'],
+textarea,
+select {
+  background-color: hsl(var(--surface));
+  border: 1px solid hsl(var(--input-border));
+  color: hsl(var(--text-primary));
+  transition: border-color var(--transition-fast);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: hsl(var(--input-border-focus));
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: hsl(var(--text-muted));
 }
 
 /* ============================================================================
@@ -573,16 +470,39 @@ input[type='range']::-moz-range-progress {
 
 /* Subtle separator */
 .separator-subtle {
-  background-color: hsl(var(--border) / 0.4);
+  background-color: hsl(var(--hairline));
 }
 
 /* Muted link */
 .link-muted {
-  color: hsl(var(--muted-foreground));
+  color: hsl(var(--text-muted));
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: color var(--transition-fast);
 }
 
 .link-muted:hover {
-  color: hsl(var(--foreground));
+  color: hsl(var(--text-secondary));
+}
+
+/* Surface utilities */
+.bg-surface {
+  background-color: hsl(var(--surface));
+}
+
+.bg-surface-2 {
+  background-color: hsl(var(--surface-2));
+}
+
+/* Border utilities */
+.border-hairline {
+  border-color: hsl(var(--hairline));
+}
+
+/* Text utilities */
+.text-primary {
+  color: hsl(var(--text-primary));
+}
+
+.text-secondary {
+  color: hsl(var(--text-secondary));
 }

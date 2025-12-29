@@ -48,7 +48,7 @@ const HOW_IT_WORKS = {
     },
     {
       title: 'Observações',
-      description: 'Leituras derivadas dos dados com fontes científicas. Você decide o que é relevante.',
+      description: 'Observações derivadas dos dados com fontes científicas. Você decide o que é relevante.',
     },
     {
       title: 'Compartilhamento',

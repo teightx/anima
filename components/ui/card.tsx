@@ -10,14 +10,15 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     data-slot="card"
+    data-variant={variant}
     className={cn(
       'rounded-xl border bg-card text-card-foreground',
       variant === 'default' && [
-        'border-border/50 shadow-[var(--shadow-sm)]',
-        'transition-[box-shadow,border-color] duration-200',
-        'hover:shadow-[var(--shadow-md)] hover:border-border/70',
+        'shadow-[var(--shadow-subtle)]',
+        'transition-[box-shadow,border-color]',
+        'hover:shadow-[var(--shadow-soft)]',
       ],
-      variant === 'static' && 'border-border/40 shadow-[var(--shadow-xs)]',
+      variant === 'static' && 'shadow-[var(--shadow-subtle)]',
       variant === 'ghost' && 'border-transparent bg-transparent shadow-none',
       className
     )}
@@ -44,10 +45,7 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      'text-base font-semibold leading-snug tracking-tight text-foreground',
-      className
-    )}
+    className={cn('text-h3', className)}
     {...props}
   />
 ));
@@ -59,7 +57,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('text-sm text-muted-foreground leading-relaxed', className)}
+    className={cn('text-body-sm text-text-muted', className)}
     {...props}
   />
 ));

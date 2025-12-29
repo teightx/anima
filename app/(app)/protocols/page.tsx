@@ -22,8 +22,8 @@ export default async function ProtocolsPage({
   return (
     <PageContainer>
       <PageHeader
-        title={t(lang, 'page.protocols.title')}
-        description={t(lang, 'page.protocols.subtitle')}
+        title={t(lang, 'page.plans.title')}
+        description={t(lang, 'page.plans.subtitle')}
       />
 
       <ProtocolsClient fetchOptions={fetchOptions} />

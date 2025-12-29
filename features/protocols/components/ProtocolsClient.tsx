@@ -109,7 +109,7 @@ export function ProtocolsClient({ fetchOptions }: ProtocolsClientProps) {
         })
       );
 
-      success('Tarefa concluida');
+      success('Passo concluído');
     } else {
       showError('Nao foi possivel registrar');
     }

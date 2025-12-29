@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { Segmented, type SegmentedOption } from '@/components/system';
 import type { TimeRange } from '../types';
 
 interface TimeRangeToggleProps {
@@ -8,43 +8,18 @@ interface TimeRangeToggleProps {
   onChange: (value: TimeRange) => void;
 }
 
+const options: SegmentedOption<TimeRange>[] = [
+  { value: 'week', label: '7 dias' },
+  { value: 'month', label: '30 dias' },
+];
+
 export function TimeRangeToggle({ value, onChange }: TimeRangeToggleProps) {
   return (
-    <div
-      className="flex gap-0.5 p-0.5 bg-muted/50 rounded-md w-fit"
-      role="radiogroup"
+    <Segmented
+      options={options}
+      value={value}
+      onChange={onChange}
       aria-label="Período"
-    >
-      <button
-        type="button"
-        role="radio"
-        aria-checked={value === 'week'}
-        onClick={() => onChange('week')}
-        className={cn(
-          'px-3 py-1.5 text-[0.8125rem] font-medium rounded transition-colors',
-          'focus:outline-none focus:ring-2 focus:ring-ring/40 focus:ring-offset-2',
-          value === 'week'
-            ? 'bg-card text-foreground shadow-[var(--shadow-xs)]'
-            : 'text-muted-foreground hover:text-foreground'
-        )}
-      >
-        7 dias
-      </button>
-      <button
-        type="button"
-        role="radio"
-        aria-checked={value === 'month'}
-        onClick={() => onChange('month')}
-        className={cn(
-          'px-3 py-1.5 text-[0.8125rem] font-medium rounded transition-colors',
-          'focus:outline-none focus:ring-2 focus:ring-ring/40 focus:ring-offset-2',
-          value === 'month'
-            ? 'bg-card text-foreground shadow-[var(--shadow-xs)]'
-            : 'text-muted-foreground hover:text-foreground'
-        )}
-      >
-        30 dias
-      </button>
-    </div>
+    />
   );
 }

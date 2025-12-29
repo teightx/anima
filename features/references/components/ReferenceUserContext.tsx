@@ -1,22 +1,25 @@
 'use client';
 
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { InlineNote } from '@/components/system';
+
+'use client';
+
+import {
+  QuietCard,
+  QuietCardContent,
+  SectionHeader,
+  InlineNote,
+} from '@/components/system';
 
 export function ReferenceUserContext() {
   return (
-    <Card variant="ghost" className="border border-dashed border-border/50">
-      <CardHeader className="pb-3">
-        <CardTitle className="text-[0.8125rem] font-medium text-muted-foreground">
-          Relação com seus registros
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-[0.8125rem] text-muted-foreground/70 leading-relaxed">
-          Esta seção contextualiza o estudo com seus dados ao longo do tempo.
-          Disponível em breve.
+    <QuietCard>
+      <SectionHeader title="Relação com seus registros" size="small" />
+      <QuietCardContent>
+        <p className="text-body-sm text-text-secondary leading-relaxed">
+          Análise descritiva baseada nos dados registrados. Frequência, período e ocorrência dos padrões observados.
         </p>
-      </CardContent>
-    </Card>
+      </QuietCardContent>
+    </QuietCard>
   );
 }
-

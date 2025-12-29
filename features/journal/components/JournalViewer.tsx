@@ -1,6 +1,10 @@
 'use client';
 
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import {
+  QuietCard,
+  QuietCardContent,
+  QuietCardFooter,
+} from '@/components/system';
 import { Button } from '@/components/ui/button';
 
 interface JournalViewerProps {
@@ -10,16 +14,18 @@ interface JournalViewerProps {
 
 export function JournalViewer({ content, onEdit }: JournalViewerProps) {
   return (
-    <Card>
-      <CardContent className="pt-6">
-        <p className="text-sm text-foreground whitespace-pre-wrap">{content}</p>
-      </CardContent>
+    <QuietCard padding="none">
+      <QuietCardContent className="p-5">
+        <p className="text-body-sm text-text-primary whitespace-pre-wrap leading-relaxed">
+          {content}
+        </p>
+      </QuietCardContent>
 
-      <CardFooter className="border-t pt-4">
+      <QuietCardFooter className="border-t border-hairline px-5 py-4">
         <Button variant="ghost" size="sm" onClick={onEdit}>
           Editar
         </Button>
-      </CardFooter>
-    </Card>
+      </QuietCardFooter>
+    </QuietCard>
   );
 }

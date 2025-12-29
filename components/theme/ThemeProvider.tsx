@@ -7,6 +7,7 @@ import {
   useState,
   useCallback,
   useMemo,
+  useRef,
   type ReactNode,
 } from 'react';
 
@@ -21,6 +22,7 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 const STORAGE_KEY = 'anima-theme';
+const TRANSITION_DURATION = 300; // ms - matches --transition-slow
 
 function getSystemTheme(): 'light' | 'dark' {
   if (typeof window === 'undefined') return 'light';
@@ -46,6 +48,33 @@ function resolveTheme(theme: Theme): 'light' | 'dark' {
   return theme === 'system' ? getSystemTheme() : theme;
 }
 
+/**
+ * Aplica transição suave entre temas
+ */
+function applyThemeWithTransition(newResolved: 'light' | 'dark') {
+  const html = document.documentElement;
+  
+  // Adiciona classe de transição
+  html.classList.add('theme-transition');
+  
+  // Aplica o novo tema
+  html.classList.remove('light', 'dark');
+  html.classList.add(newResolved);
+  
+  // Remove classe de transição após a animação
+  setTimeout(() => {
+    html.classList.remove('theme-transition');
+  }, TRANSITION_DURATION);
+}
+
+/**
+ * Aplica tema sem transição (para carga inicial)
+ */
+function applyThemeInstant(resolved: 'light' | 'dark') {
+  document.documentElement.classList.remove('light', 'dark');
+  document.documentElement.classList.add(resolved);
+}
+
 interface ThemeProviderProps {
   children: ReactNode;
   defaultTheme?: Theme;
@@ -57,8 +86,9 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const [theme, setThemeInternal] = useState<Theme>(defaultTheme);
   const resolvedTheme = useMemo(() => resolveTheme(theme), [theme]);
+  const isInitialMount = useRef(true);
 
-  // Sync with localStorage and apply to DOM
+  // Sync with localStorage and apply to DOM on mount
   // Using useLayoutEffect to prevent flash
   useLayoutEffect(() => {
     const stored = getInitialTheme();
@@ -67,15 +97,17 @@ export function ThemeProvider({
     }
 
     const resolved = resolveTheme(stored);
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(resolved);
+    applyThemeInstant(resolved);
+    
+    // Mark initial mount as complete
+    isInitialMount.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Apply theme changes to DOM
+  // Apply theme changes to DOM with transition (after initial mount)
   useLayoutEffect(() => {
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(resolvedTheme);
+    if (isInitialMount.current) return;
+    applyThemeWithTransition(resolvedTheme);
   }, [resolvedTheme]);
 
   // Listen for system theme changes
@@ -85,8 +117,11 @@ export function ThemeProvider({
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
       const resolved = getSystemTheme();
-      document.documentElement.classList.remove('light', 'dark');
-      document.documentElement.classList.add(resolved);
+      if (isInitialMount.current) {
+        applyThemeInstant(resolved);
+      } else {
+        applyThemeWithTransition(resolved);
+      }
     };
 
     mediaQuery.addEventListener('change', handleChange);

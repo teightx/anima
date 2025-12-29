@@ -1,0 +1,241 @@
+/* ============================================================================
+   Ânima Design System v2 — Tokens
+   ============================================================================
+   
+   Paleta nomeada por função, não por gosto.
+   
+   Personalidade visual:
+   - Calmo, técnico, discreto
+   - Humano sem ser emocional
+   - Editorial sem parecer blog
+   - Digital sem parecer SaaS genérico
+   
+   Light mode: "porcelana fria" (off-white material)
+   Dark mode: "ink azul" (azul escuro profundo, não preto)
+   Primary: azul mineral levemente profundo (não vibrante)
+   
+   ============================================================================ */
+
+/* ============================================================================
+   Light Mode — Porcelana Fria
+   ============================================================================ */
+
+:root {
+  /* === Backgrounds === */
+  /* Background principal - porcelana fria com leve calor */
+  --background: 45 20% 97%;
+  
+  /* Surface - cards e elementos elevados */
+  --surface: 45 18% 99%;
+  
+  /* Surface-2 - elementos dentro de surfaces */
+  --surface-2: 45 15% 95.5%;
+  
+  /* === Text === */
+  /* Text primary - alto contraste, azul mineral */
+  --text-primary: 215 25% 16%;
+  
+  /* Text secondary - conteúdo regular */
+  --text-secondary: 215 18% 28%;
+  
+  /* Text muted - labels, placeholders, hints */
+  --text-muted: 215 12% 48%;
+  
+  /* === Borders === */
+  /* Border padrão - sutil */
+  --border: 215 15% 88%;
+  
+  /* Hairline - quase invisível */
+  --hairline: 215 12% 92%;
+  
+  /* === Primary === */
+  /* Azul mineral profundo (não vibrante) */
+  --primary: 210 32% 42%;
+  --primary-hover: 210 34% 36%;
+  --primary-foreground: 45 20% 98%;
+  
+  /* Primary muted - para badges, highlights suaves */
+  --primary-muted: 210 25% 92%;
+  --primary-muted-foreground: 210 32% 38%;
+  
+  /* === States === */
+  /* Danger muted - apenas para erros discretos */
+  --danger-muted: 0 35% 94%;
+  --danger-muted-foreground: 0 45% 42%;
+  
+  /* Success muted */
+  --success-muted: 145 25% 92%;
+  --success-muted-foreground: 145 35% 32%;
+  
+  /* Warning muted */
+  --warning-muted: 38 35% 92%;
+  --warning-muted-foreground: 38 50% 35%;
+  
+  /* === Interactive === */
+  --ring: 210 32% 42%;
+  --input-border: 215 15% 85%;
+  --input-border-focus: 210 32% 52%;
+  
+  /* === Shadows === */
+  --shadow-color: 215 20% 50%;
+  --shadow-subtle: 0 1px 2px 0 hsl(var(--shadow-color) / 0.04);
+  --shadow-soft: 
+    0 1px 3px 0 hsl(var(--shadow-color) / 0.04),
+    0 1px 2px -1px hsl(var(--shadow-color) / 0.03);
+  
+  /* === Spacing & Radius === */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.75rem;
+  
+  /* Ritmo vertical base */
+  --space-unit: 0.25rem;
+  --space-xs: calc(var(--space-unit) * 1);
+  --space-sm: calc(var(--space-unit) * 2);
+  --space-md: calc(var(--space-unit) * 4);
+  --space-lg: calc(var(--space-unit) * 6);
+  --space-xl: calc(var(--space-unit) * 8);
+  --space-2xl: calc(var(--space-unit) * 12);
+  
+  /* === Typography === */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  
+  /* === Transition === */
+  --transition-fast: 120ms ease;
+  --transition-base: 180ms ease;
+  --transition-slow: 300ms ease;
+}
+
+/* ============================================================================
+   Dark Mode — Ink Azul
+   ============================================================================ */
+
+.dark {
+  /* === Backgrounds === */
+  /* Background principal - azul profundo (não preto) */
+  --background: 222 28% 8%;
+  
+  /* Surface - cards com leve elevação */
+  --surface: 222 25% 11%;
+  
+  /* Surface-2 - elementos dentro de surfaces */
+  --surface-2: 222 22% 14%;
+  
+  /* === Text === */
+  /* Text primary - contraste confortável */
+  --text-primary: 210 25% 93%;
+  
+  /* Text secondary */
+  --text-secondary: 210 18% 78%;
+  
+  /* Text muted */
+  --text-muted: 210 12% 55%;
+  
+  /* === Borders === */
+  /* Border padrão */
+  --border: 222 18% 18%;
+  
+  /* Hairline */
+  --hairline: 222 15% 14%;
+  
+  /* === Primary === */
+  /* Azul mineral mais claro para dark */
+  --primary: 210 35% 55%;
+  --primary-hover: 210 38% 62%;
+  --primary-foreground: 222 28% 8%;
+  
+  /* Primary muted */
+  --primary-muted: 210 25% 16%;
+  --primary-muted-foreground: 210 30% 68%;
+  
+  /* === States === */
+  --danger-muted: 0 30% 14%;
+  --danger-muted-foreground: 0 40% 65%;
+  
+  --success-muted: 145 22% 14%;
+  --success-muted-foreground: 145 30% 58%;
+  
+  --warning-muted: 38 28% 14%;
+  --warning-muted-foreground: 38 40% 62%;
+  
+  /* === Interactive === */
+  --ring: 210 35% 55%;
+  --input-border: 222 18% 22%;
+  --input-border-focus: 210 35% 50%;
+  
+  /* === Shadows === */
+  --shadow-color: 222 40% 4%;
+  --shadow-subtle: 0 1px 2px 0 hsl(var(--shadow-color) / 0.25);
+  --shadow-soft: 
+    0 2px 4px 0 hsl(var(--shadow-color) / 0.3),
+    0 1px 2px -1px hsl(var(--shadow-color) / 0.2);
+}
+
+/* ============================================================================
+   Shadcn/UI Compatibility Layer
+   ============================================================================
+   Mapeia os tokens semânticos para os nomes esperados pelo shadcn/ui
+   ============================================================================ */
+
+:root,
+.dark {
+  /* Background */
+  --foreground: var(--text-primary);
+  
+  /* Card/Surface */
+  --card: var(--surface);
+  --card-foreground: var(--text-primary);
+  
+  /* Popover */
+  --popover: var(--surface);
+  --popover-foreground: var(--text-primary);
+  
+  /* Secondary (usando surface-2) */
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--text-primary);
+  
+  /* Muted */
+  --muted: var(--surface-2);
+  --muted-foreground: var(--text-muted);
+  
+  /* Accent */
+  --accent: var(--primary-muted);
+  --accent-foreground: var(--primary-muted-foreground);
+  
+  /* Destructive */
+  --destructive: var(--danger-muted);
+  --destructive-foreground: var(--danger-muted-foreground);
+  
+  /* Input */
+  --input: var(--input-border);
+}
+
+/* ============================================================================
+   Theme Transition
+   ============================================================================
+   Transição suave entre temas sem flash
+   ============================================================================ */
+
+html {
+  /* Previne flash de tema incorreto */
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* Transição suave apenas para cores */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: 
+    background-color var(--transition-slow),
+    border-color var(--transition-slow),
+    color var(--transition-base) !important;
+  transition-delay: 0s !important;
+}
+

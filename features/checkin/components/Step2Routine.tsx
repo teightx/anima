@@ -7,25 +7,38 @@ interface Step2RoutineProps {
   onChange: (updates: Partial<CheckinFormData>) => void;
 }
 
+/**
+ * Step2Routine — Estrutura do dia
+ * 
+ * Campo: Organização (estruturado → disperso)
+ * Linguagem neutra e descritiva
+ */
 export function Step2Routine({ data, onChange }: Step2RoutineProps) {
   const id = 'routine-score';
 
+  const getStructureLabel = (score: number): string => {
+    if (score <= 3) return 'Dia com estrutura definida.';
+    if (score <= 6) return 'Estrutura parcial.';
+    if (score <= 8) return 'Estrutura reduzida.';
+    return 'Sem estrutura percebida.';
+  };
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <div className="space-y-1">
-        <h3 className="text-base font-medium">Estrutura do dia</h3>
-        <p className="text-sm text-muted-foreground">
+        <h3 className="text-h4">Estrutura do dia</h3>
+        <p className="text-body-sm text-text-muted">
           Como você percebe a organização do dia.
         </p>
       </div>
 
       <div className="space-y-4">
-        <div className="space-y-2.5">
+        <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label htmlFor={id} className="text-sm text-muted-foreground">
+            <label htmlFor={id} className="text-body-sm text-text-muted">
               Organização
             </label>
-            <span className="text-sm font-medium text-foreground tabular-nums min-w-[1.5rem] text-right">
+            <span className="text-body-sm font-medium text-text-primary tabular-nums min-w-[1.5rem] text-right">
               {data.routineScore}
             </span>
           </div>
@@ -41,22 +54,15 @@ export function Step2Routine({ data, onChange }: Step2RoutineProps) {
             aria-valuemax={10}
             aria-valuenow={data.routineScore}
           />
-          <div className="flex justify-between text-[0.6875rem] text-muted-foreground/70">
+          <div className="flex justify-between text-overline text-text-muted/70 normal-case tracking-normal">
             <span>Estruturado</span>
             <span>Disperso</span>
           </div>
         </div>
 
-        <div className="pt-4 border-t border-border/50">
-          <p className="text-[0.8125rem] text-muted-foreground leading-relaxed">
-            {data.routineScore <= 3 && 'Dia com estrutura definida.'}
-            {data.routineScore > 3 &&
-              data.routineScore <= 6 &&
-              'Estrutura parcial.'}
-            {data.routineScore > 6 &&
-              data.routineScore <= 8 &&
-              'Estrutura reduzida.'}
-            {data.routineScore > 8 && 'Sem estrutura percebida.'}
+        <div className="pt-3 border-t border-hairline">
+          <p className="text-body-sm text-text-muted">
+            {getStructureLabel(data.routineScore)}
           </p>
         </div>
       </div>

@@ -1,6 +1,10 @@
 'use client';
 
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import {
+  QuietCard,
+  QuietCardContent,
+  SectionHeader,
+} from '@/components/system';
 
 interface ReferenceLimitationsProps {
   type: string;
@@ -58,26 +62,20 @@ export function ReferenceLimitations({
   }
 
   return (
-    <Card variant="static">
-      <CardHeader className="pb-3">
-        <CardTitle className="text-[0.8125rem] font-medium text-muted-foreground">
-          Limitações conhecidas
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+    <QuietCard>
+      <SectionHeader title="Limitações conhecidas" size="small" />
+      <QuietCardContent>
         <ul className="space-y-2">
           {limitations.map((limitation, index) => (
-            <li
-              key={index}
-              className="flex items-start gap-3"
-            >
-              <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground/30" />
-              <span className="text-[0.8125rem] text-muted-foreground leading-relaxed">{limitation}</span>
+            <li key={index} className="flex items-start gap-3">
+              <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-text-muted/30" />
+              <span className="text-body-sm text-text-muted leading-relaxed">
+                {limitation}
+              </span>
             </li>
           ))}
         </ul>
-      </CardContent>
-    </Card>
+      </QuietCardContent>
+    </QuietCard>
   );
 }
-

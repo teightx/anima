@@ -3,37 +3,35 @@ import type { Dictionary } from './types';
 export const pt: Dictionary = {
   // Navigation
   'nav.today': 'Hoje',
-  'nav.history': 'Histórico',
-  'nav.readings': 'Leituras',
-  'nav.protocols': 'Protocolos',
-  'nav.anima': 'Ânima',
+  'nav.records': 'Registros',
+  'nav.observations': 'Observações',
+  'nav.plans': 'Planos',
+  'nav.settings': 'Configurações',
 
   // Page: Today
   'page.today.title': 'Hoje',
   'page.today.subtitle': 'Registro do dia',
 
-  // Page: History
-  'page.history.title': 'Histórico',
-  'page.history.subtitle': 'Registros acumulados',
+  // Page: Records (antigo History + Dashboard)
+  'page.records.title': 'Registros',
+  'page.records.subtitle': 'Seus registros acumulados',
 
-  // Page: Readings
-  'page.readings.title': 'Leituras',
-  'page.readings.subtitle': 'Observações derivadas dos seus registros',
+  // Page: Observations (antigo Readings)
+  'page.observations.title': 'Observações',
+  'page.observations.subtitle': 'Leituras descritivas a partir dos seus registros',
 
-  // Page: Protocols
-  'page.protocols.title': 'Protocolos',
-  'page.protocols.subtitle': 'Acompanhamentos estruturados',
+  // Page: Plans (antigo Protocols)
+  'page.plans.title': 'Planos',
+  'page.plans.subtitle': 'Estruturas de acompanhamento opcionais',
 
-  // Page: Anima
-  'page.anima.title': 'Ânima',
-  'page.anima.subtitle': 'Central de configurações',
+  // Page: Settings (antigo Ânima)
+  'page.settings.title': 'Configurações',
+  'page.settings.subtitle': 'Central de configurações',
 
-  // Page: Dashboard
-  'page.dashboard.title': 'Painel',
-  'page.dashboard.subtitle': 'Visão agregada dos registros',
-
-  // Navigation extras
-  'nav.dashboard': 'Painel',
+  // Day Context (antigo Journal/Diário)
+  'dayContext.sectionTitle': 'Contexto do dia',
+  'dayContext.placeholder': 'Adicione contexto sobre seu dia...',
+  'dayContext.add': 'Adicionar contexto',
 
   // References
   'references.title': 'Fonte',
@@ -48,24 +46,26 @@ export const pt: Dictionary = {
   'references.back': 'Voltar',
   'references.viewSource': 'Ver fonte',
 
-  // Protocols
-  'protocols.start': 'Iniciar',
-  'protocols.inProgress': 'Em andamento',
-  'protocols.complete': 'Concluído',
-  'protocols.empty': 'Nenhum protocolo disponível',
-  'protocols.back': 'Voltar',
-  'protocols.continue': 'Continuar',
-  'protocols.taskCompleted': 'Tarefa registrada',
+  // Plans (antigo Protocols)
+  'plans.start': 'Iniciar',
+  'plans.inProgress': 'Em andamento',
+  'plans.complete': 'Concluído',
+  'plans.empty': 'Nenhum plano disponível',
+  'plans.back': 'Voltar',
+  'plans.continue': 'Continuar',
+  'plans.taskCompleted': 'Tarefa registrada',
+  'plans.disclaimer': 'Planos são ferramentas de apoio ao acompanhamento. Você pode pausar ou encerrar a qualquer momento.',
 
-  // Therapy
-  'therapy.status.active': 'Ativo',
-  'therapy.status.inactive': 'Inativo',
-  'therapy.activate': 'Ativar compartilhamento',
-  'therapy.deactivate': 'Desativar',
-  'therapy.sharing.title': 'Dados compartilhados',
-  'therapy.preview.title': 'Visualização do profissional',
-  'therapy.consent.notice':
-    'Você controla quais dados são compartilhados. Nada é enviado sem sua autorização.',
+  // Sharing (antigo Therapy/Modo Terapia)
+  'sharing.title': 'Compartilhar com profissional',
+  'sharing.status.active': 'Ativo',
+  'sharing.status.inactive': 'Inativo',
+  'sharing.activate': 'Ativar compartilhamento',
+  'sharing.deactivate': 'Desativar',
+  'sharing.dataTitle': 'Dados compartilhados',
+  'sharing.preview.title': 'Visualização do profissional',
+  'sharing.consent.notice':
+    'Nada é compartilhado automaticamente. Você controla exatamente o que será visível.',
 
   // Common
   'common.inDevelopment': 'Em desenvolvimento',
@@ -91,30 +91,31 @@ export const pt: Dictionary = {
   'feedback.loadError': 'Não foi possível carregar',
   'feedback.noData': 'Registre quando preferir.',
 
-  // Readings
-  'readings.tabs.all': 'Todas',
-  'readings.tabs.sleep': 'Sono',
-  'readings.tabs.stability': 'Estabilidade',
-  'readings.tabs.routine': 'Rotina',
-  'readings.tabs.consistency': 'Consistência',
-  'readings.period.week': '7 dias',
-  'readings.period.month': '30 dias',
-  'readings.showHidden': 'Ver arquivadas',
-  'readings.empty.title': 'Sem leituras nesta categoria',
-  'readings.empty.body': 'Tente outra categoria ou período.',
-  'readings.actions.useful': 'Útil',
-  'readings.actions.notApplicable': 'Não se aplica',
-  'readings.actions.hide': 'Arquivar',
-  'readings.meta.confidence': 'Confiança',
-  'readings.meta.severity': 'Relevância',
-  'readings.meta.source': 'Fonte',
+  // Observations (antigo Readings)
+  'observations.tabs.all': 'Todas',
+  'observations.tabs.sleep': 'Sono',
+  'observations.tabs.stability': 'Estabilidade',
+  'observations.tabs.routine': 'Rotina',
+  'observations.tabs.consistency': 'Consistência',
+  'observations.period.week': '7 dias',
+  'observations.period.month': '30 dias',
+  'observations.showHidden': 'Ver arquivadas',
+  'observations.empty.title': 'Sem observações nesta categoria',
+  'observations.empty.body': 'Tente outra categoria ou período.',
+  'observations.actions.useful': 'Útil',
+  'observations.actions.notApplicable': 'Não se aplica',
+  'observations.actions.hide': 'Arquivar',
+  'observations.meta.confidence': 'Confiança',
+  'observations.meta.severity': 'Relevância',
+  'observations.meta.source': 'Fonte',
+  'observations.disclaimer': 'As observações apresentadas são descritivas e não implicam causa, diagnóstico ou recomendação.',
 
   // Check-in
   'checkin.empty.title': 'Sem registro',
   'checkin.empty.body': 'Nenhum registro para esta data.',
   'checkin.empty.cta': 'Registrar',
 
-  // Journal
-  'journal.sectionTitle': 'Anotações',
-  'journal.placeholder': 'Escreva o que observar...',
+  // Day Context (antigo Journal)
+  'journal.sectionTitle': 'Contexto do dia',
+  'journal.placeholder': 'Adicione contexto sobre seu dia...',
 };

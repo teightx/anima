@@ -15,7 +15,7 @@ export function EmptyReadings({ isFiltered }: EmptyReadingsProps) {
       description={
         isFiltered
           ? 'Tente outra categoria ou ajuste o periodo de busca.'
-          : 'Leituras serao geradas conforme voce registra dados. Continue fazendo seus check-ins.'
+          : 'Observações serão geradas conforme você registra dados. Continue fazendo seus check-ins.'
       }
     />
   );

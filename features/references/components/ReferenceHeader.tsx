@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { MetaRowGroup, MetaRow } from '@/components/system';
 import type { ReferenceSource } from '../types';
 import { formatReferenceType, formatAuthors, buildExternalUrl } from '../helpers';
 
@@ -43,27 +44,21 @@ export function ReferenceHeader({ reference, backHref }: ReferenceHeaderProps) {
 
       {/* Title and metadata */}
       <div className="space-y-3">
-        <h1 className="text-xl font-semibold leading-tight text-foreground">
-          {reference.title}
-        </h1>
+        <h1 className="text-h1">{reference.title}</h1>
 
-        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-          <span>{formatAuthors(reference.authors)}</span>
-          <span className="text-border">·</span>
-          <span>{reference.year}</span>
+        <MetaRowGroup>
+          <MetaRow label="" value={formatAuthors(reference.authors)} />
+          <MetaRow label="" value={reference.year} />
           {reference.journal && (
-            <>
-              <span className="text-border">·</span>
-              <span className="italic">{reference.journal}</span>
-            </>
+            <MetaRow label="" value={<span className="font-serif italic">{reference.journal}</span>} />
           )}
-        </div>
+        </MetaRowGroup>
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
           <Badge variant="secondary">{formatReferenceType(reference.type)}</Badge>
           {reference.topics.slice(0, 3).map(topic => (
-            <Badge key={topic} variant="outline" className="text-xs">
+            <Badge key={topic} variant="outline">
               {topic}
             </Badge>
           ))}
@@ -72,4 +67,3 @@ export function ReferenceHeader({ reference, backHref }: ReferenceHeaderProps) {
     </div>
   );
 }
-

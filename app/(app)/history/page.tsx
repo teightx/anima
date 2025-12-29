@@ -28,8 +28,8 @@ export default async function HistoryPage({ searchParams }: HistoryPageProps) {
   return (
     <PageContainer>
       <PageHeader
-        title={t(lang, 'page.history.title')}
-        description={t(lang, 'page.history.subtitle')}
+        title={t(lang, 'page.records.title')}
+        description={t(lang, 'page.records.subtitle')}
       />
 
       <HistoryClient

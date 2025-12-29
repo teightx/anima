@@ -1,12 +1,12 @@
 'use client';
 
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card';
+  QuietCard,
+  QuietCardHeader,
+  QuietCardTitle,
+  QuietCardDescription,
+  QuietCardContent,
+} from '@/components/system';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
@@ -22,22 +22,21 @@ export function TherapyStatusCard({
   isUpdating,
 }: TherapyStatusCardProps) {
   return (
-    <Card>
-      <CardHeader>
+    <QuietCard padding="none">
+      <QuietCardHeader className="p-5">
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-1">
-            <CardTitle className="text-base">Modo Terapia</CardTitle>
-            <CardDescription>
-              Quando ativo, permite configurar o compartilhamento de dados com
-              profissionais de saude.
-            </CardDescription>
+            <QuietCardTitle>Compartilhar com profissional</QuietCardTitle>
+            <QuietCardDescription>
+              Configure quais dados serão visíveis para profissionais de saúde.
+            </QuietCardDescription>
           </div>
           <Badge variant={enabled ? 'default' : 'secondary'}>
             {enabled ? 'Ativo' : 'Inativo'}
           </Badge>
         </div>
-      </CardHeader>
-      <CardContent>
+      </QuietCardHeader>
+      <QuietCardContent className="px-5 pb-5">
         <Button
           variant={enabled ? 'outline' : 'default'}
           onClick={onToggle}
@@ -47,11 +46,10 @@ export function TherapyStatusCard({
           {isUpdating
             ? 'Atualizando...'
             : enabled
-              ? 'Desativar'
-              : 'Ativar modo terapia'}
+              ? 'Desativar compartilhamento'
+              : 'Ativar compartilhamento'}
         </Button>
-      </CardContent>
-    </Card>
+      </QuietCardContent>
+    </QuietCard>
   );
 }
-

@@ -28,12 +28,12 @@ export type ProtocolsPageState = 'loading' | 'loaded' | 'error';
  * Protocol category display labels
  */
 export const CATEGORY_LABELS: Record<ProtocolCategory, string> = {
-  medication: 'Medicacao',
-  therapy: 'Terapia',
+  medication: 'Medicação',
+  therapy: 'Acompanhamento',
   lifestyle: 'Estilo de vida',
   sleep: 'Sono',
-  exercise: 'Exercicio',
-  nutrition: 'Nutricao',
+  exercise: 'Exercício',
+  nutrition: 'Nutrição',
   mindfulness: 'Mindfulness',
   social: 'Social',
 };

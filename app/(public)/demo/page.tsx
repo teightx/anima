@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, Calendar, BarChart3, BookOpen, FileText, Sparkles, History } from 'lucide-react';
+import { ArrowRight, Calendar, FolderOpen, Eye, ListChecks, Settings } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -8,49 +8,41 @@ const DEMO_STEPS = [
   {
     number: 1,
     title: 'Hoje',
-    description: 'Registro do dia, resumo e anotações',
+    description: 'Registro do dia, resumo e contexto',
     href: '/today?demo=1',
     icon: Calendar,
     highlight: 'Ponto de entrada do usuário',
   },
   {
     number: 2,
-    title: 'Histórico',
-    description: 'Calendário com lacunas visíveis',
+    title: 'Registros',
+    description: 'Calendário e visão agregada',
     href: '/history?demo=1',
-    icon: History,
+    icon: FolderOpen,
     highlight: 'Padrões ao longo do tempo',
   },
   {
     number: 3,
-    title: 'Painel',
-    description: 'Gráficos de tendência e variações',
-    href: '/dashboard?demo=1',
-    icon: BarChart3,
-    highlight: 'Visão agregada',
-  },
-  {
-    number: 4,
-    title: 'Leituras',
+    title: 'Observações',
     description: 'Observações derivadas + fontes científicas',
     href: '/readings?demo=1',
-    icon: BookOpen,
+    icon: Eye,
     highlight: 'Feedback do usuário',
   },
   {
-    number: 5,
-    title: 'Protocolos',
-    description: 'Biblioteca e protocolo em andamento',
+    number: 4,
+    title: 'Planos',
+    description: 'Biblioteca e plano em andamento',
     href: '/protocols?demo=1',
-    icon: FileText,
+    icon: ListChecks,
     highlight: 'Acompanhamento estruturado',
   },
   {
-    number: 6,
-    title: 'Ânima',
-    description: 'Modo terapia e controle de compartilhamento',
+    number: 5,
+    title: 'Configurações',
+    description: 'Compartilhamento com profissional',
     href: '/anima?demo=1',
-    icon: Sparkles,
+    icon: Settings,
     highlight: 'Controle do usuário',
   },
 ];
@@ -98,7 +90,7 @@ export default function DemoPage() {
 
       {/* Steps */}
       <section className="space-y-4">
-        <h2 className="text-sm font-medium text-muted-foreground">Roteiro em 6 passos</h2>
+        <h2 className="text-sm font-medium text-muted-foreground">Roteiro em 5 passos</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {DEMO_STEPS.map((step) => {
             const Icon = step.icon;
@@ -152,7 +144,7 @@ export default function DemoPage() {
           <li>• <strong>Modo demo:</strong> <code className="bg-muted px-1 rounded">?demo=1</code> fixa a data em 2024-12-30</li>
           <li>• <strong>Dataset:</strong> 30 dias de dados simulados com padrões realistas</li>
           <li>• <strong>Lacunas:</strong> Dias 8, 15, 22 e 23 sem registro (intencional)</li>
-          <li>• <strong>Protocolo ativo:</strong> "Regulação de Sono" em andamento</li>
+          <li>• <strong>Plano ativo:</strong> "Regulação de Sono" em andamento</li>
         </ul>
       </section>
 
