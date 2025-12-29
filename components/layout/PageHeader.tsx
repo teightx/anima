@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import { cn } from '@/lib/utils';
+import { DemoIndicator } from './DemoIndicator';
 
 interface PageHeaderProps {
   title: string;
@@ -17,9 +19,14 @@ export function PageHeader({
     <header className={cn('mb-8', className)}>
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-1">
-          <h1 className="text-[1.625rem] font-semibold tracking-tight text-foreground leading-tight">
-            {title}
-          </h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-[1.625rem] font-semibold tracking-tight text-foreground leading-tight">
+              {title}
+            </h1>
+            <Suspense fallback={null}>
+              <DemoIndicator />
+            </Suspense>
+          </div>
           {description && (
             <p className="text-[0.9375rem] text-muted-foreground leading-relaxed">
               {description}

@@ -276,6 +276,18 @@ const journals: JournalEntry[] = [
     tags: ['recuperacao'],
     isPrivate: true,
   },
+  {
+    id: uuid('je', 5),
+    userId: USER_ID,
+    type: 'reflection',
+    createdAt: getDateTimeISO(29, 19),
+    updatedAt: getDateTimeISO(29, 19),
+    content:
+      'Fim do mes. Olhando para tras, percebo que a terceira semana foi mais dificil, mas a recuperacao veio. Bom ter esse registro para observar padroes.',
+    mood: 7,
+    tags: ['reflexao', 'padroes'],
+    isPrivate: true,
+  },
 ];
 
 // ============================================================================
