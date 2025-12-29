@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { getJSON, postJSON } from '@/lib/apiClient';
+import { getJSON, postJSON, type FetchOptions } from '@/lib/apiClient';
 import type { JournalEntry } from '@/server/contracts';
 import { JournalEditor } from './JournalEditor';
 import { JournalViewer } from './JournalViewer';
@@ -18,9 +18,10 @@ type SectionState = 'loading' | 'empty' | 'editing' | 'saved' | 'error';
 
 interface JournalSectionProps {
   date: string;
+  fetchOptions?: FetchOptions;
 }
 
-export function JournalSection({ date }: JournalSectionProps) {
+export function JournalSection({ date, fetchOptions }: JournalSectionProps) {
   const [state, setState] = useState<SectionState>('loading');
   const [entry, setEntry] = useState<JournalEntry | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,7 +32,10 @@ export function JournalSection({ date }: JournalSectionProps) {
       setState('loading');
       setError(null);
 
-      const result = await getJSON<JournalEntry>(`/api/journal/${date}`);
+      const result = await getJSON<JournalEntry>(
+        `/api/journal/${date}`,
+        fetchOptions
+      );
 
       if (result.ok) {
         setEntry(result.data);
@@ -46,7 +50,7 @@ export function JournalSection({ date }: JournalSectionProps) {
     }
 
     loadJournal();
-  }, [date]);
+  }, [date, fetchOptions]);
 
   const handleStartEditing = () => {
     setState('editing');
@@ -64,10 +68,14 @@ export function JournalSection({ date }: JournalSectionProps) {
     setIsSubmitting(true);
     setError(null);
 
-    const result = await postJSON<JournalEntry>(`/api/journal/${date}`, {
-      content,
-      type: 'free_write',
-    });
+    const result = await postJSON<JournalEntry>(
+      `/api/journal/${date}`,
+      {
+        content,
+        type: 'free_write',
+      },
+      fetchOptions
+    );
 
     setIsSubmitting(false);
 

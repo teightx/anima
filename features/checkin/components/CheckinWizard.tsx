@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { postJSON } from '@/lib/apiClient';
+import { postJSON, type FetchOptions } from '@/lib/apiClient';
 import type { DailyCheckIn } from '@/server/contracts';
 import {
   type CheckinFormData,
@@ -18,9 +18,14 @@ import { Step3Sleep } from './Step3Sleep';
 interface CheckinWizardProps {
   date: string;
   onSuccess: (checkin: DailyCheckIn) => void;
+  fetchOptions?: FetchOptions;
 }
 
-export function CheckinWizard({ date, onSuccess }: CheckinWizardProps) {
+export function CheckinWizard({
+  date,
+  onSuccess,
+  fetchOptions,
+}: CheckinWizardProps) {
   const [step, setStep] = useState<WizardStep>(1);
   const [data, setData] = useState<CheckinFormData>(DEFAULT_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,7 +54,8 @@ export function CheckinWizard({ date, onSuccess }: CheckinWizardProps) {
     const payload = formDataToPayload(data);
     const result = await postJSON<DailyCheckIn>(
       `/api/checkins/${date}`,
-      payload
+      payload,
+      fetchOptions
     );
 
     setIsSubmitting(false);

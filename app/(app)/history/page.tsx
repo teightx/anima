@@ -1,49 +1,43 @@
 import { PageHeader, PageContainer } from '@/components/layout';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
+import { getLangFromSearchParams, t } from '@/lib/i18n';
+import { getAsOfDate, toISODate, parseISODate } from '@/lib/appDate';
+import { parseTestOptions } from '@/lib/apiClient';
+import { HistoryClient } from '@/features/history';
 
-export default function HistoryPage() {
+interface HistoryPageProps {
+  searchParams: Promise<{
+    lang?: string;
+    asOf?: string;
+    delay?: string;
+    error?: string;
+  }>;
+}
+
+export default async function HistoryPage({ searchParams }: HistoryPageProps) {
+  const params = await searchParams;
+  const lang = getLangFromSearchParams(params);
+  const asOf = getAsOfDate(params);
+  const fetchOptions = parseTestOptions(params);
+
+  // Calculate date range: last 30 days ending on asOf
+  const endDate = asOf;
+  const startDateObj = parseISODate(asOf);
+  startDateObj.setDate(startDateObj.getDate() - 29);
+  const startDate = toISODate(startDateObj);
+
   return (
     <PageContainer>
       <PageHeader
-        title="Historico"
-        description="Visualize sua jornada ao longo do tempo"
+        title={t(lang, 'page.history.title')}
+        description={t(lang, 'page.history.subtitle')}
       />
 
-      {/* Status Card */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Em desenvolvimento</CardTitle>
-          <CardDescription>
-            Esta secao exibira graficos e registros historicos de seus dados.
-          </CardDescription>
-        </CardHeader>
-      </Card>
-
-      {/* Chart Placeholder */}
-      <Card className="p-6">
-        <div className="space-y-4">
-          <Skeleton className="h-4 w-40" />
-          <Skeleton className="h-48 w-full" />
-        </div>
-      </Card>
-
-      {/* Records List Placeholder */}
-      <Card className="p-6">
-        <div className="space-y-4">
-          <Skeleton className="h-4 w-32" />
-          <div className="space-y-3">
-            <Skeleton className="h-16 w-full" />
-            <Skeleton className="h-16 w-full" />
-            <Skeleton className="h-16 w-full" />
-          </div>
-        </div>
-      </Card>
+      <HistoryClient
+        asOf={asOf}
+        startDate={startDate}
+        endDate={endDate}
+        fetchOptions={fetchOptions}
+      />
     </PageContainer>
   );
 }

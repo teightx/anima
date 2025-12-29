@@ -8,12 +8,44 @@ export type ApiResult<T> =
   | { ok: true; data: T; meta?: ApiSuccessResponse<T>['meta'] }
   | { ok: false; error: ApiErrorResponse['error'] };
 
+export interface FetchOptions {
+  delay?: number;
+  error?: boolean;
+}
+
+/**
+ * Build URL with test params (delay/error)
+ */
+function applyTestParams(url: string, options?: FetchOptions): string {
+  if (!options) return url;
+
+  const hasQuery = url.includes('?');
+  const params: string[] = [];
+
+  if (options.delay && options.delay > 0) {
+    params.push(`delay=${options.delay}`);
+  }
+  if (options.error) {
+    params.push('error=1');
+  }
+
+  if (params.length === 0) return url;
+
+  const separator = hasQuery ? '&' : '?';
+  return `${url}${separator}${params.join('&')}`;
+}
+
 /**
  * GET request with typed response
  */
-export async function getJSON<T>(url: string): Promise<ApiResult<T>> {
+export async function getJSON<T>(
+  url: string,
+  options?: FetchOptions
+): Promise<ApiResult<T>> {
   try {
-    const response = await fetch(url, {
+    const finalUrl = applyTestParams(url, options);
+
+    const response = await fetch(finalUrl, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -51,10 +83,13 @@ export async function getJSON<T>(url: string): Promise<ApiResult<T>> {
  */
 export async function postJSON<T>(
   url: string,
-  body: Record<string, unknown>
+  body: Record<string, unknown>,
+  options?: FetchOptions
 ): Promise<ApiResult<T>> {
   try {
-    const response = await fetch(url, {
+    const finalUrl = applyTestParams(url, options);
+
+    const response = await fetch(finalUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -107,4 +142,24 @@ export function buildApiUrl(
 
   const query = searchParams.toString();
   return query ? `${base}?${query}` : base;
+}
+
+/**
+ * Parse test options from URL search params
+ */
+export function parseTestOptions(
+  searchParams?: Record<string, string | string[] | undefined>
+): FetchOptions {
+  if (!searchParams) return {};
+
+  const delayParam = searchParams.delay;
+  const delay = Array.isArray(delayParam) ? delayParam[0] : delayParam;
+
+  const errorParam = searchParams.error;
+  const error = Array.isArray(errorParam) ? errorParam[0] : errorParam;
+
+  return {
+    delay: delay ? parseInt(delay, 10) : undefined,
+    error: error === '1' || error === 'true',
+  };
 }

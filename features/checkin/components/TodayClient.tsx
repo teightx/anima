@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { getJSON } from '@/lib/apiClient';
+import { getJSON, type FetchOptions } from '@/lib/apiClient';
 import { formatDisplayDate, getRelativeDay } from '@/lib/appDate';
 import type { DailyCheckIn } from '@/server/contracts';
 import { CheckinWizard } from './CheckinWizard';
@@ -21,9 +21,10 @@ type PageState = 'loading' | 'empty' | 'has-data' | 'wizard' | 'error';
 interface TodayClientProps {
   date: string;
   asOf: string;
+  fetchOptions?: FetchOptions;
 }
 
-export function TodayClient({ date, asOf }: TodayClientProps) {
+export function TodayClient({ date, asOf, fetchOptions }: TodayClientProps) {
   const [state, setState] = useState<PageState>('loading');
   const [checkin, setCheckin] = useState<DailyCheckIn | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -36,7 +37,10 @@ export function TodayClient({ date, asOf }: TodayClientProps) {
       setState('loading');
       setError(null);
 
-      const result = await getJSON<DailyCheckIn>(`/api/checkins/${date}`);
+      const result = await getJSON<DailyCheckIn>(
+        `/api/checkins/${date}`,
+        fetchOptions
+      );
 
       if (result.ok) {
         setCheckin(result.data);
@@ -51,7 +55,7 @@ export function TodayClient({ date, asOf }: TodayClientProps) {
     }
 
     loadCheckin();
-  }, [date]);
+  }, [date, fetchOptions]);
 
   const handleStartWizard = () => {
     setState('wizard');
@@ -133,7 +137,11 @@ export function TodayClient({ date, asOf }: TodayClientProps) {
         <div className="text-sm text-muted-foreground">
           Registrando: {displayDate}
         </div>
-        <CheckinWizard date={date} onSuccess={handleWizardSuccess} />
+        <CheckinWizard
+          date={date}
+          onSuccess={handleWizardSuccess}
+          fetchOptions={fetchOptions}
+        />
       </div>
     );
   }
@@ -143,7 +151,7 @@ export function TodayClient({ date, asOf }: TodayClientProps) {
     return (
       <div className="space-y-6">
         <CheckinSummary checkin={checkin} dateLabel={dateLabel} />
-        <JournalSection date={date} />
+        <JournalSection date={date} fetchOptions={fetchOptions} />
       </div>
     );
   }
