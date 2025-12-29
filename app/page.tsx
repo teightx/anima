@@ -99,7 +99,7 @@ function Section({
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       {/* Hero */}
       <header className="px-4 py-16 sm:px-6 lg:px-8 sm:py-24">
         <div className="mx-auto max-w-3xl text-center space-y-4">
