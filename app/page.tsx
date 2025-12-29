@@ -1,6 +1,19 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+
+export const metadata: Metadata = {
+  title: 'Ânima — Acompanhamento contínuo de bem-estar',
+  description:
+    'Ferramenta de registro e observação para acompanhamento pessoal de bem-estar ao longo do tempo. Dados pertencem ao usuário. Tecnologia como suporte, não substituição.',
+  openGraph: {
+    title: 'Ânima',
+    description: 'Acompanhamento contínuo de bem-estar',
+    type: 'website',
+    locale: 'pt_BR',
+  },
+};
 
 // ============================================================================
 // Content
