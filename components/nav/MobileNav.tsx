@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import {
   CalendarDays,
   History,
+  BarChart3,
   BookOpen,
   FileText,
   Sparkles,
@@ -21,6 +22,11 @@ const navItems = [
     href: '/history',
     label: 'Historico',
     icon: History,
+  },
+  {
+    href: '/dashboard',
+    label: 'Dashboard',
+    icon: BarChart3,
   },
   {
     href: '/readings',

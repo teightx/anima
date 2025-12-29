@@ -28,6 +28,13 @@ export const en: Partial<Dictionary> = {
   'page.anima.title': 'Anima',
   'page.anima.subtitle': 'Your journey companion',
 
+  // Page: Dashboard
+  'page.dashboard.title': 'Dashboard',
+  'page.dashboard.subtitle': 'Metrics visualization over time',
+
+  // Navigation extras
+  'nav.dashboard': 'Dashboard',
+
   // Common
   'common.inDevelopment': 'In development',
   'common.loading': 'Loading...',

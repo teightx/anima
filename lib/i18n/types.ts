@@ -32,6 +32,13 @@ export type DictionaryKey =
   | 'page.anima.title'
   | 'page.anima.subtitle'
 
+  // Page: Dashboard
+  | 'page.dashboard.title'
+  | 'page.dashboard.subtitle'
+
+  // Navigation extras
+  | 'nav.dashboard'
+
   // Common
   | 'common.inDevelopment'
   | 'common.loading'

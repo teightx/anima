@@ -28,6 +28,13 @@ export const pt: Dictionary = {
   'page.anima.title': 'Anima',
   'page.anima.subtitle': 'Seu companheiro de jornada',
 
+  // Page: Dashboard
+  'page.dashboard.title': 'Dashboard',
+  'page.dashboard.subtitle': 'Visualizacao de metricas ao longo do tempo',
+
+  // Navigation extras
+  'nav.dashboard': 'Dashboard',
+
   // Common
   'common.inDevelopment': 'Em desenvolvimento',
   'common.loading': 'Carregando...',
