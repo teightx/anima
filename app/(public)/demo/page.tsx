@@ -39,7 +39,7 @@ const DEMO_SECTIONS = [
 
 export default function DemoPage() {
   return (
-    <div className="max-w-xl mx-auto space-y-10">
+    <div className="max-w-xl mx-auto px-4 py-12 sm:py-16 space-y-10">
       {/* Header */}
       <header className="text-center space-y-4">
         <LogoMock size="large" />
