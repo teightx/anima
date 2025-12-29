@@ -3,6 +3,7 @@ import { ArrowRight, Calendar, FolderOpen, Eye, ListChecks, Settings } from 'luc
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { LogoMock } from '@/components/brand';
 
 const DEMO_STEPS = [
   {
@@ -59,15 +60,18 @@ export default function DemoPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <header className="space-y-2">
-        <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-semibold tracking-tight">Roteiro de Demonstração</h1>
-          <Badge variant="outline" className="text-[0.6875rem]">2–3 min</Badge>
+      <header className="space-y-4">
+        <LogoMock size="default" />
+        <div className="space-y-2">
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-semibold tracking-tight">Roteiro de Demonstração</h1>
+            <Badge variant="outline" className="text-[0.6875rem]">2–3 min</Badge>
+          </div>
+          <p className="text-muted-foreground leading-relaxed">
+            Apresente o Ânima como um produto de acompanhamento contínuo de bem-estar: 
+            observacional, institucional e centrado no controle do usuário.
+          </p>
         </div>
-        <p className="text-muted-foreground leading-relaxed">
-          Apresente o Ânima como um produto de acompanhamento contínuo de bem-estar: 
-          observacional, institucional e centrado no controle do usuário.
-        </p>
       </header>
 
       {/* Quick Start */}
@@ -150,9 +154,12 @@ export default function DemoPage() {
 
       {/* Footer */}
       <footer className="pt-4 border-t border-border/40">
-        <p className="text-[0.75rem] text-muted-foreground/60 text-center">
-          Ânima — Acompanhamento contínuo de bem-estar
-        </p>
+        <div className="flex flex-col items-center gap-2">
+          <LogoMock size="small" />
+          <p className="text-[0.75rem] text-muted-foreground/60 text-center">
+            Acompanhamento contínuo de bem-estar
+          </p>
+        </div>
       </footer>
     </div>
   );

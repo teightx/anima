@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { LogoMock, ImageMock } from '@/components/brand';
 
 export const metadata: Metadata = {
   title: 'Ânima — Acompanhamento contínuo de bem-estar',
@@ -116,24 +117,30 @@ export default function LandingPage() {
     <div className="min-h-screen bg-background">
       {/* Hero */}
       <header className="px-4 py-16 sm:px-6 lg:px-8 sm:py-24">
-        <div className="mx-auto max-w-3xl text-center space-y-4">
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            Ânima
-          </h1>
-          <p className="text-xl text-foreground/90 font-serif">
-            Acompanhamento contínuo de bem-estar
-          </p>
-          <p className="text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Ferramenta de registro e observação para acompanhamento pessoal ao longo do tempo.
-            Dados sob seu controle. Tecnologia como suporte, não substituição.
-          </p>
-          <div className="pt-6">
-            <Link
-              href="/today"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
-            >
-              Acessar o app
-            </Link>
+        <div className="mx-auto max-w-3xl space-y-8">
+          {/* Logo e texto */}
+          <div className="text-center space-y-4">
+            <LogoMock size="large" />
+            <p className="text-xl text-foreground/90 font-serif">
+              Acompanhamento contínuo de bem-estar
+            </p>
+            <p className="text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
+              Ferramenta de registro e observação para acompanhamento pessoal ao longo do tempo.
+              Dados sob seu controle. Tecnologia como suporte, não substituição.
+            </p>
+            <div className="pt-6">
+              <Link
+                href="/today"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+              >
+                Entrar
+              </Link>
+            </div>
+          </div>
+          
+          {/* Visual mock */}
+          <div className="pt-8">
+            <ImageMock ratio="16:9" variant="light" alt="Visual provisório" />
           </div>
         </div>
       </header>
@@ -219,8 +226,8 @@ export default function LandingPage() {
       <footer className="border-t border-border/40 px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="space-y-1">
-            <p className="text-sm font-medium text-foreground">Ânima</p>
-            <p className="text-[0.75rem] text-muted-foreground/60">
+            <LogoMock size="small" />
+            <p className="text-[0.75rem] text-muted-foreground/60 mt-1">
               Acompanhamento contínuo de bem-estar
             </p>
           </div>
@@ -229,7 +236,7 @@ export default function LandingPage() {
               href="/demo" 
               className="text-[0.75rem] text-muted-foreground/60 hover:text-muted-foreground transition-colors"
             >
-              Demo
+              Ver demo
             </Link>
             <span className="text-[0.75rem] text-muted-foreground/40">
               © {new Date().getFullYear()}

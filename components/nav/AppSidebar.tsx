@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/theme';
+import { LogoMock } from '@/components/brand';
 
 const navItems = [
   {
@@ -58,12 +59,7 @@ export function AppSidebar() {
       <div className="flex flex-col flex-1 min-h-0 bg-surface/60 backdrop-blur-sm border-r border-hairline">
         {/* Logo */}
         <div className="flex items-center h-14 px-5">
-          <Link
-            href="/today"
-            className="text-h3 text-text-primary tracking-tight"
-          >
-            Ânima
-          </Link>
+          <LogoMock asLink href="/today" size="default" />
         </div>
 
         {/* Navigation */}

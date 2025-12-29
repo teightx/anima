@@ -1,0 +1,38 @@
+/* ============================================================================
+   Ânima Brand Mock — Tokens Temporários
+   ============================================================================
+   
+   Tokens provisórios para identidade visual mock.
+   Esses tokens não substituem os tokens reais.
+   Eles só facilitam troca futura por logo/imagens reais.
+   
+   ============================================================================ */
+
+:root,
+.dark {
+  /* === Brand Accent === */
+  /* Igual ao primary atual (facilita troca futura) */
+  --brand-accent: var(--primary);
+  --brand-accent-hover: var(--primary-hover);
+  
+  /* === Brand Background === */
+  /* Igual ao background atual */
+  --brand-bg: var(--background);
+  
+  /* === Brand Muted === */
+  /* Para elementos secundários do brand */
+  --brand-muted: var(--surface-2);
+  --brand-muted-foreground: var(--text-muted);
+}
+
+/* ============================================================================
+   Transições para troca futura
+   ============================================================================ */
+
+.brand-transition {
+  transition: 
+    background-color var(--transition-base),
+    color var(--transition-base),
+    border-color var(--transition-base);
+}
+

@@ -1,14 +1,9 @@
 'use client';
 
-import { InlineNote } from '@/components/system';
-
-'use client';
-
 import {
   QuietCard,
   QuietCardContent,
   SectionHeader,
-  InlineNote,
 } from '@/components/system';
 
 export function ReferenceUserContext() {
