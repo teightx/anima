@@ -9,10 +9,12 @@ import { cn } from '@/lib/utils';
  * Características:
  * - Apenas tipográfico, sem símbolo
  * - Mesma fonte da UI (sans base)
- * - Peso médio ou semi-bold
- * - Tracking levemente aberto
- * - Sem sombra, sem cor especial
- * - Usa --text-primary
+ * - Peso semi-bold com tracking aberto
+ * - Ponto discreto como gesto visual
+ * - Sem sombra, usa --text-primary
+ * 
+ * Gesto visual escolhido: ponto após o nome "Ânima."
+ * Marca presença sem parecer definitivo.
  * 
  * Onde aplicar:
  * - Sidebar (topo)
@@ -32,6 +34,8 @@ interface LogoMockProps {
   href?: string;
   /** Tamanho do logo */
   size?: 'default' | 'small' | 'large';
+  /** Mostrar ponto (gesto visual) */
+  showDot?: boolean;
   /** Classes adicionais */
   className?: string;
 }
@@ -40,17 +44,25 @@ export function LogoMock({
   asLink = false,
   href = '/',
   size = 'default',
+  showDot = true,
   className,
 }: LogoMockProps) {
   const textClasses = cn(
-    'font-medium tracking-[0.02em] text-text-primary',
+    'font-semibold tracking-[0.03em] text-text-primary',
     size === 'small' && 'text-h4',
     size === 'default' && 'text-h3',
     size === 'large' && 'text-h1',
     className
   );
 
-  const content = <span className={textClasses}>Ânima</span>;
+  const content = (
+    <span className={textClasses}>
+      Ânima
+      {showDot && (
+        <span className="text-primary opacity-70">.</span>
+      )}
+    </span>
+  );
 
   if (asLink) {
     return (

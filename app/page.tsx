@@ -116,8 +116,8 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero */}
-      <header className="px-4 py-16 sm:px-6 lg:px-8 sm:py-24">
-        <div className="mx-auto max-w-3xl space-y-8">
+      <header className="px-4 pt-12 pb-8 sm:px-6 lg:px-8 sm:pt-16 sm:pb-12">
+        <div className="mx-auto max-w-4xl space-y-10">
           {/* Logo e texto */}
           <div className="text-center space-y-4">
             <LogoMock size="large" />
@@ -128,19 +128,19 @@ export default function LandingPage() {
               Ferramenta de registro e observação para acompanhamento pessoal ao longo do tempo.
               Dados sob seu controle. Tecnologia como suporte, não substituição.
             </p>
-            <div className="pt-6">
+            <div className="pt-4">
               <Link
                 href="/today"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
               >
                 Entrar
               </Link>
             </div>
           </div>
           
-          {/* Visual mock */}
-          <div className="pt-8">
-            <ImageMock ratio="16:9" variant="light" alt="Visual provisório" />
+          {/* Visual mock - grande, acima da dobra */}
+          <div className="pt-4">
+            <ImageMock ratio="21:9" variant="material" alt="Visual provisório" />
           </div>
         </div>
       </header>
