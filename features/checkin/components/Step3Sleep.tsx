@@ -12,28 +12,28 @@ interface Step3SleepProps {
 const SLEEP_QUALITIES: { value: SleepQuality; label: string }[] = [
   { value: 'poor', label: 'Ruim' },
   { value: 'fair', label: 'Regular' },
-  { value: 'good', label: 'Boa' },
-  { value: 'excellent', label: 'Otima' },
+  { value: 'good', label: 'Bom' },
+  { value: 'excellent', label: 'Ótimo' },
 ];
 
 export function Step3Sleep({ data, onChange }: Step3SleepProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-1">
-        <h3 className="text-lg font-medium">Sono e eventos</h3>
+        <h3 className="text-base font-medium">Sono e ocorrências</h3>
         <p className="text-sm text-muted-foreground">
-          Informacoes sobre seu sono e eventos relevantes.
+          Dados sobre descanso e eventos observados.
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-5">
         {/* Sleep hours */}
         <div className="space-y-2">
           <label
             htmlFor="sleep-hours"
-            className="text-sm font-medium text-foreground"
+            className="text-sm text-muted-foreground"
           >
-            Horas de sono
+            Duração do sono
           </label>
           <div className="flex items-center gap-3">
             <input
@@ -44,23 +44,20 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
               step={0.5}
               value={data.sleepHours}
               onChange={e => onChange({ sleepHours: Number(e.target.value) })}
-              className="w-24 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-20 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring/40"
               aria-describedby="sleep-hours-hint"
             />
             <span className="text-sm text-muted-foreground">horas</span>
           </div>
-          <p id="sleep-hours-hint" className="text-xs text-muted-foreground">
-            Tempo total de sono na ultima noite
-          </p>
         </div>
 
         {/* Sleep quality */}
         <div className="space-y-2">
-          <span className="text-sm font-medium text-foreground">
-            Qualidade do sono
+          <span className="text-sm text-muted-foreground">
+            Qualidade percebida
           </span>
           <div
-            className="flex gap-2"
+            className="flex gap-1.5"
             role="radiogroup"
             aria-label="Qualidade do sono"
           >
@@ -72,11 +69,11 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
                 aria-checked={data.sleepQuality === value}
                 onClick={() => onChange({ sleepQuality: value })}
                 className={cn(
-                  'flex-1 px-3 py-2 text-sm rounded-md border transition-colors',
-                  'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+                  'flex-1 px-2.5 py-2 text-[0.8125rem] rounded-md border transition-colors',
+                  'focus:outline-none focus:ring-2 focus:ring-ring/40 focus:ring-offset-2',
                   data.sleepQuality === value
-                    ? 'bg-primary text-primary-foreground border-primary'
-                    : 'bg-background border-input hover:bg-muted'
+                    ? 'bg-secondary text-secondary-foreground border-secondary'
+                    : 'bg-background border-input hover:bg-muted/50'
                 )}
               >
                 {label}
@@ -86,33 +83,33 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
         </div>
 
         {/* Events */}
-        <div className="space-y-3 pt-4 border-t border-border">
-          <span className="text-sm font-medium text-foreground">
-            Eventos relevantes
+        <div className="space-y-3 pt-4 border-t border-border/50">
+          <span className="text-sm text-muted-foreground">
+            Ocorrências
           </span>
 
-          <div className="space-y-2">
-            <label className="flex items-center gap-3 cursor-pointer">
+          <div className="space-y-2.5">
+            <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={data.hadImpulse}
                 onChange={e => onChange({ hadImpulse: e.target.checked })}
-                className="w-4 h-4 rounded border-input text-primary focus:ring-ring"
+                className="w-4 h-4 mt-0.5 rounded border-input text-primary focus:ring-ring/40"
               />
-              <span className="text-sm text-foreground">
-                Houve impulso ou urgencia incomum
+              <span className="text-sm text-foreground leading-snug">
+                Impulso ou urgência atípica
               </span>
             </label>
 
-            <label className="flex items-center gap-3 cursor-pointer">
+            <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={data.hadCrisis}
                 onChange={e => onChange({ hadCrisis: e.target.checked })}
-                className="w-4 h-4 rounded border-input text-primary focus:ring-ring"
+                className="w-4 h-4 mt-0.5 rounded border-input text-primary focus:ring-ring/40"
               />
-              <span className="text-sm text-foreground">
-                Houve momento de crise ou descontrole
+              <span className="text-sm text-foreground leading-snug">
+                Episódio de instabilidade
               </span>
             </label>
           </div>
@@ -122,17 +119,17 @@ export function Step3Sleep({ data, onChange }: Step3SleepProps) {
         <div className="space-y-2">
           <label
             htmlFor="notes"
-            className="text-sm font-medium text-foreground"
+            className="text-sm text-muted-foreground"
           >
-            Observacoes (opcional)
+            Observações
           </label>
           <textarea
             id="notes"
             value={data.notes}
             onChange={e => onChange({ notes: e.target.value })}
-            placeholder="Algo relevante sobre o dia..."
+            placeholder="Contexto adicional, se relevante..."
             rows={3}
-            className="w-full px-3 py-2 text-sm border border-input bg-background rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full px-3 py-2 text-sm border border-input bg-background rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-ring/40"
           />
         </div>
       </div>

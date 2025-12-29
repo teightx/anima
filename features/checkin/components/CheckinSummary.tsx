@@ -23,15 +23,15 @@ function MetricDisplay({
 
   return (
     <div className="space-y-1.5">
-      <div className="flex items-center justify-between text-sm">
+      <div className="flex items-center justify-between text-[0.8125rem]">
         <span className="text-muted-foreground">{label}</span>
-        <span className="font-medium tabular-nums">
-          {value}/{max}
+        <span className="font-medium tabular-nums text-foreground">
+          {value}
         </span>
       </div>
-      <div className="h-1.5 bg-muted rounded-full overflow-hidden">
+      <div className="h-1 bg-muted rounded-full overflow-hidden">
         <div
-          className="h-full bg-primary rounded-full transition-all"
+          className="h-full bg-primary/50 rounded-full transition-all"
           style={{ width: `${percentage}%` }}
         />
       </div>
@@ -43,21 +43,21 @@ function getSleepQualityLabel(quality: string): string {
   const labels: Record<string, string> = {
     poor: 'Ruim',
     fair: 'Regular',
-    good: 'Boa',
-    excellent: 'Otima',
+    good: 'Bom',
+    excellent: 'Ótimo',
   };
   return labels[quality] || quality;
 }
 
 export function CheckinSummary({ checkin, dateLabel }: CheckinSummaryProps) {
   return (
-    <Card>
+    <Card variant="static">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-base font-medium">
+          <CardTitle className="text-[0.9375rem] font-medium">
             Registro do dia
           </CardTitle>
-          <Badge variant="secondary" className="text-xs">
+          <Badge variant="muted" className="text-[0.6875rem]">
             {dateLabel}
           </Badge>
         </div>
@@ -69,17 +69,17 @@ export function CheckinSummary({ checkin, dateLabel }: CheckinSummaryProps) {
           <MetricDisplay label="Energia" value={checkin.energyScore} />
         </div>
 
-        <Separator />
+        <Separator className="bg-border/40" />
 
         {/* Sleep info */}
-        <div className="grid grid-cols-2 gap-4 text-sm">
-          <div>
+        <div className="grid grid-cols-2 gap-4 text-[0.8125rem]">
+          <div className="space-y-0.5">
             <span className="text-muted-foreground">Sono</span>
             <p className="font-medium">
               {checkin.sleepHours ? `${checkin.sleepHours}h` : '-'}
             </p>
           </div>
-          <div>
+          <div className="space-y-0.5">
             <span className="text-muted-foreground">Qualidade</span>
             <p className="font-medium">
               {getSleepQualityLabel(checkin.sleepQuality)}
@@ -90,19 +90,19 @@ export function CheckinSummary({ checkin, dateLabel }: CheckinSummaryProps) {
         {/* Symptoms */}
         {checkin.symptoms && checkin.symptoms.length > 0 && (
           <>
-            <Separator />
+            <Separator className="bg-border/40" />
             <div className="space-y-2">
-              <span className="text-sm text-muted-foreground">
-                Sintomas registrados
+              <span className="text-[0.8125rem] text-muted-foreground">
+                Ocorrências
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {checkin.symptoms.map(symptom => (
                   <Badge
                     key={symptom.symptomId}
                     variant={
-                      symptom.severity === 'high' ? 'destructive' : 'secondary'
+                      symptom.severity === 'high' ? 'destructive' : 'muted'
                     }
-                    className="text-xs"
+                    className="text-[0.6875rem]"
                   >
                     {symptom.name}
                   </Badge>
@@ -115,10 +115,10 @@ export function CheckinSummary({ checkin, dateLabel }: CheckinSummaryProps) {
         {/* Notes */}
         {checkin.notes && (
           <>
-            <Separator />
-            <div className="space-y-1">
-              <span className="text-sm text-muted-foreground">Observacoes</span>
-              <p className="text-sm">{checkin.notes}</p>
+            <Separator className="bg-border/40" />
+            <div className="space-y-1.5">
+              <span className="text-[0.8125rem] text-muted-foreground">Observações</span>
+              <p className="text-[0.8125rem] leading-relaxed">{checkin.notes}</p>
             </div>
           </>
         )}

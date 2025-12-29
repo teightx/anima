@@ -1,54 +1,32 @@
 import { PageHeader, PageContainer } from '@/components/layout';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
+import { getLangFromSearchParams, t } from '@/lib/i18n';
+import { parseTestOptions } from '@/lib/apiClient';
+import { ProtocolsClient } from '@/features/protocols';
 
-export default function ProtocolsPage() {
+interface ProtocolsPageProps {
+  searchParams: Promise<{
+    lang?: string;
+    asOf?: string;
+    delay?: string;
+    error?: string;
+  }>;
+}
+
+export default async function ProtocolsPage({
+  searchParams,
+}: ProtocolsPageProps) {
+  const params = await searchParams;
+  const lang = getLangFromSearchParams(params);
+  const fetchOptions = parseTestOptions(params);
+
   return (
     <PageContainer>
       <PageHeader
-        title="Protocolos"
-        description="Tratamentos e acompanhamentos ativos"
+        title={t(lang, 'page.protocols.title')}
+        description={t(lang, 'page.protocols.subtitle')}
       />
 
-      {/* Status Card */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Em desenvolvimento</CardTitle>
-          <CardDescription>
-            Esta secao permitira gerenciar protocolos de tratamento e
-            medicacoes.
-          </CardDescription>
-        </CardHeader>
-      </Card>
-
-      {/* Active Protocols Placeholder */}
-      <Card className="p-6">
-        <div className="space-y-4">
-          <Skeleton className="h-4 w-36" />
-          <div className="space-y-3">
-            <Skeleton className="h-20 w-full" />
-            <Skeleton className="h-20 w-full" />
-          </div>
-        </div>
-      </Card>
-
-      {/* Schedule Placeholder */}
-      <Card className="p-6">
-        <div className="space-y-4">
-          <Skeleton className="h-4 w-28" />
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Skeleton className="h-16 w-full" />
-            <Skeleton className="h-16 w-full" />
-            <Skeleton className="h-16 w-full" />
-            <Skeleton className="h-16 w-full" />
-          </div>
-        </div>
-      </Card>
+      <ProtocolsClient fetchOptions={fetchOptions} />
     </PageContainer>
   );
 }

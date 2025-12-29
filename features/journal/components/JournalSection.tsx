@@ -1,15 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getJSON, postJSON, type FetchOptions } from '@/lib/apiClient';
+import { ErrorState, useToast } from '@/components/feedback';
 import type { JournalEntry } from '@/server/contracts';
 import { JournalEditor } from './JournalEditor';
 import { JournalViewer } from './JournalViewer';
@@ -26,6 +22,7 @@ export function JournalSection({ date, fetchOptions }: JournalSectionProps) {
   const [entry, setEntry] = useState<JournalEntry | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { success, error: showError } = useToast();
 
   useEffect(() => {
     async function loadJournal() {
@@ -82,19 +79,21 @@ export function JournalSection({ date, fetchOptions }: JournalSectionProps) {
     if (result.ok) {
       setEntry(result.data);
       setState('saved');
+      success('Salvo');
     } else {
       setError(result.error.message);
+      showError('Não foi possível salvar');
     }
   };
 
   // Loading state
   if (state === 'loading') {
     return (
-      <section className="space-y-3" aria-label="Anotacoes do dia">
-        <h2 className="text-sm font-medium text-muted-foreground">
-          Anotacoes do dia
+      <section className="space-y-3" aria-label="Anotações">
+        <h2 className="text-[0.8125rem] font-medium text-muted-foreground">
+          Anotações
         </h2>
-        <Card className="p-6">
+        <Card className="p-5">
           <div className="space-y-2">
             <Skeleton className="h-4 w-3/4" />
             <Skeleton className="h-4 w-1/2" />
@@ -107,25 +106,15 @@ export function JournalSection({ date, fetchOptions }: JournalSectionProps) {
   // Error state
   if (state === 'error') {
     return (
-      <section className="space-y-3" aria-label="Anotacoes do dia">
-        <h2 className="text-sm font-medium text-muted-foreground">
-          Anotacoes do dia
+      <section className="space-y-3" aria-label="Anotações">
+        <h2 className="text-[0.8125rem] font-medium text-muted-foreground">
+          Anotações
         </h2>
-        <Card>
-          <CardHeader className="pb-4">
-            <CardTitle className="text-base">Erro ao carregar</CardTitle>
-            <CardDescription>{error || 'Erro desconhecido'}</CardDescription>
-          </CardHeader>
-          <div className="px-6 pb-6">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => window.location.reload()}
-            >
-              Tentar novamente
-            </Button>
-          </div>
-        </Card>
+        <ErrorState
+          title="Não foi possível carregar"
+          description={error || 'Ocorreu um erro ao buscar os dados.'}
+          onRetry={() => window.location.reload()}
+        />
       </section>
     );
   }
@@ -133,16 +122,16 @@ export function JournalSection({ date, fetchOptions }: JournalSectionProps) {
   // Empty state
   if (state === 'empty') {
     return (
-      <section className="space-y-3" aria-label="Anotacoes do dia">
-        <h2 className="text-sm font-medium text-muted-foreground">
-          Anotacoes do dia
+      <section className="space-y-3" aria-label="Anotações">
+        <h2 className="text-[0.8125rem] font-medium text-muted-foreground">
+          Anotações
         </h2>
         <Button
-          variant="outline"
-          className="w-full justify-start text-muted-foreground"
+          variant="ghost"
+          className="w-full justify-start text-muted-foreground text-[0.8125rem]"
           onClick={handleStartEditing}
         >
-          Adicionar anotacao
+          Adicionar anotação
         </Button>
       </section>
     );
@@ -151,9 +140,9 @@ export function JournalSection({ date, fetchOptions }: JournalSectionProps) {
   // Editing state
   if (state === 'editing') {
     return (
-      <section className="space-y-3" aria-label="Anotacoes do dia">
-        <h2 className="text-sm font-medium text-muted-foreground">
-          Anotacoes do dia
+      <section className="space-y-3" aria-label="Anotações">
+        <h2 className="text-[0.8125rem] font-medium text-muted-foreground">
+          Anotações
         </h2>
         <JournalEditor
           initialContent={entry?.content || ''}
@@ -169,9 +158,9 @@ export function JournalSection({ date, fetchOptions }: JournalSectionProps) {
   // Saved state
   if (state === 'saved' && entry) {
     return (
-      <section className="space-y-3" aria-label="Anotacoes do dia">
-        <h2 className="text-sm font-medium text-muted-foreground">
-          Anotacoes do dia
+      <section className="space-y-3" aria-label="Anotações">
+        <h2 className="text-[0.8125rem] font-medium text-muted-foreground">
+          Anotações
         </h2>
         <JournalViewer content={entry.content} onEdit={handleStartEditing} />
       </section>

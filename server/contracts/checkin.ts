@@ -17,6 +17,9 @@ export type MoodScore = z.infer<typeof MoodScoreSchema>;
 export const EnergyScoreSchema = z.number().int().min(1).max(10);
 export type EnergyScore = z.infer<typeof EnergyScoreSchema>;
 
+export const DayOrganizationScoreSchema = z.number().int().min(1).max(10);
+export type DayOrganizationScore = z.infer<typeof DayOrganizationScoreSchema>;
+
 export const SleepQualitySchema = z.enum(['poor', 'fair', 'good', 'excellent']);
 export type SleepQuality = z.infer<typeof SleepQualitySchema>;
 
@@ -39,6 +42,7 @@ export const DailyCheckInSchema = z.object({
   // Core metrics
   moodScore: MoodScoreSchema,
   energyScore: EnergyScoreSchema,
+  dayOrganization: DayOrganizationScoreSchema.optional(),
   sleepQuality: SleepQualitySchema,
   sleepHours: z.number().min(0).max(24).optional(),
 
@@ -84,6 +88,7 @@ export interface CreateCheckInRequest {
   date: DateISO;
   moodScore: MoodScore;
   energyScore: EnergyScore;
+  dayOrganization?: DayOrganizationScore;
   sleepQuality: SleepQuality;
   sleepHours?: number;
   symptoms?: SymptomEntry[];
@@ -100,6 +105,7 @@ export interface UpdateCheckInRequest {
   checkInId: UUID;
   moodScore?: MoodScore;
   energyScore?: EnergyScore;
+  dayOrganization?: DayOrganizationScore;
   sleepQuality?: SleepQuality;
   sleepHours?: number;
   symptoms?: SymptomEntry[];

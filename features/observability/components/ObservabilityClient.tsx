@@ -1,14 +1,8 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { getJSON, type FetchOptions } from '@/lib/apiClient';
+import { ErrorState, EmptyState } from '@/components/feedback';
 import type { DailyCheckIn } from '@/server/contracts';
 import { TimeRangeToggle } from './TimeRangeToggle';
 import { MetricChart } from './MetricChart';
@@ -70,17 +64,23 @@ export function ObservabilityClient({
 
   if (state === 'error') {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Erro ao carregar</CardTitle>
-          <CardDescription>{error || 'Erro desconhecido'}</CardDescription>
-        </CardHeader>
-        <div className="px-6 pb-6">
-          <Button variant="outline" onClick={() => window.location.reload()}>
-            Tentar novamente
-          </Button>
-        </div>
-      </Card>
+      <ErrorState
+        title="Não foi possível carregar"
+        description={error || 'Ocorreu um erro ao buscar os dados.'}
+        onRetry={() => window.location.reload()}
+      />
+    );
+  }
+
+  if (state === 'loaded' && checkins.length === 0) {
+    return (
+      <div className="space-y-4">
+        <TimeRangeToggle value={timeRange} onChange={setTimeRange} />
+        <EmptyState
+          title="Sem registros neste período"
+          description="Os dados aparecerão aqui conforme você registrar."
+        />
+      </div>
     );
   }
 

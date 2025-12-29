@@ -1,15 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card';
+import { Card, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getJSON, type FetchOptions } from '@/lib/apiClient';
+import { ErrorState, EmptyState } from '@/components/feedback';
 import { formatDisplayDate, getRelativeDay } from '@/lib/appDate';
 import type { DailyCheckIn } from '@/server/contracts';
 import { CheckinWizard } from './CheckinWizard';
@@ -90,17 +86,11 @@ export function TodayClient({ date, asOf, fetchOptions }: TodayClientProps) {
   // Error state
   if (state === 'error') {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Erro ao carregar</CardTitle>
-          <CardDescription>{error || 'Erro desconhecido'}</CardDescription>
-        </CardHeader>
-        <div className="px-6 pb-6">
-          <Button variant="outline" onClick={() => window.location.reload()}>
-            Tentar novamente
-          </Button>
-        </div>
-      </Card>
+      <ErrorState
+        title="Não foi possível carregar"
+        description={error || 'Ocorreu um erro ao buscar os dados.'}
+        onRetry={() => window.location.reload()}
+      />
     );
   }
 
@@ -108,24 +98,14 @@ export function TodayClient({ date, asOf, fetchOptions }: TodayClientProps) {
   if (state === 'empty') {
     return (
       <div className="space-y-4">
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="text-base">Sem registro</CardTitle>
-                <CardDescription className="mt-1">
-                  {displayDate}
-                </CardDescription>
-              </div>
-            </div>
-          </CardHeader>
-          <div className="px-6 pb-6">
-            <p className="text-sm text-muted-foreground mb-4">
-              Nenhum check-in registrado para este dia.
-            </p>
-            <Button onClick={handleStartWizard}>Registrar agora</Button>
-          </div>
-        </Card>
+        <EmptyState
+          title="Sem registro"
+          description={`Nenhum registro para ${displayDate}.`}
+          action={{
+            label: 'Registrar',
+            onClick: handleStartWizard,
+          }}
+        />
       </div>
     );
   }
@@ -134,7 +114,7 @@ export function TodayClient({ date, asOf, fetchOptions }: TodayClientProps) {
   if (state === 'wizard') {
     return (
       <div className="space-y-4">
-        <div className="text-sm text-muted-foreground">
+        <div className="text-[0.8125rem] text-muted-foreground">
           Registrando: {displayDate}
         </div>
         <CheckinWizard

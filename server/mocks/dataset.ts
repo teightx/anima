@@ -193,6 +193,14 @@ for (let day = 0; day < 30; day++) {
   const sleepHours = Math.max(3.5, Math.min(9, baseSleep + variation * 0.5));
   const sleepQuality = getSleepQuality(sleepHours);
 
+  // Day organization correlates with energy and mood, with some independence
+  const orgVariation = Math.cos(day * 0.5) * 0.6;
+  const baseOrg = (baseMood + baseEnergy) / 2;
+  const dayOrganization = Math.max(
+    1,
+    Math.min(10, Math.round(baseOrg + orgVariation))
+  );
+
   const date = getDateISO(day);
   const createdAt = getDateTimeISO(day, 8 + Math.floor(Math.random() * 4));
 
@@ -204,6 +212,7 @@ for (let day = 0; day < 30; day++) {
     updatedAt: createdAt,
     moodScore: moodScore as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
     energyScore: energyScore as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
+    dayOrganization: dayOrganization as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
     sleepQuality,
     sleepHours: Math.round(sleepHours * 10) / 10,
     symptoms: generateSymptoms(day, moodScore, energyScore),
@@ -490,6 +499,7 @@ const readings: Reading[] = [
     periodStart: getDateISO(0),
     periodEnd: getDateISO(13),
     relatedCheckInIds: checkins.slice(0, 7).map(c => c.id),
+    referenceId: uuid('ref', 1),
   },
   {
     id: uuid('rd', 2),
@@ -513,6 +523,7 @@ const readings: Reading[] = [
         return day >= 14 && day <= 20;
       })
       .map(c => c.id),
+    referenceId: uuid('ref', 1),
   },
   {
     id: uuid('rd', 3),
@@ -562,6 +573,7 @@ const readings: Reading[] = [
     dataPointsAnalyzed: 6,
     periodStart: getDateISO(14),
     periodEnd: getDateISO(20),
+    referenceId: uuid('ref', 2),
   },
   {
     id: uuid('rd', 6),
@@ -882,6 +894,22 @@ const protocolRuns: ProtocolRun[] = [
       { taskId: 'task-1-1', completedAt: getDateTimeISO(-14) },
     ],
     notes: 'Protocolo concluido com 100% de aderencia',
+  },
+  {
+    id: uuid('run', 2),
+    userId: USER_ID,
+    protocolId: uuid('prot', 1),
+    status: 'active',
+    startedAt: getDateTimeISO(-5),
+    pausedAt: null,
+    completedAt: null,
+    expectedEndDate: getDateISO(16),
+    currentStepIndex: 0,
+    completedTasks: [
+      { taskId: 'task-1-1', completedAt: getDateTimeISO(-4) },
+      { taskId: 'task-1-2', completedAt: getDateTimeISO(-4) },
+    ],
+    notes: undefined,
   },
 ];
 

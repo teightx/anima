@@ -13,19 +13,19 @@ export function Step2Routine({ data, onChange }: Step2RoutineProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-1">
-        <h3 className="text-lg font-medium">Organizacao do dia</h3>
+        <h3 className="text-base font-medium">Estrutura do dia</h3>
         <p className="text-sm text-muted-foreground">
-          Como foi a estrutura do seu dia ate agora?
+          Como você percebe a organização do dia.
         </p>
       </div>
 
       <div className="space-y-4">
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           <div className="flex items-center justify-between">
-            <label htmlFor={id} className="text-sm font-medium text-foreground">
-              Nivel de organizacao
+            <label htmlFor={id} className="text-sm text-muted-foreground">
+              Organização
             </label>
-            <span className="text-sm font-medium text-muted-foreground tabular-nums">
+            <span className="text-sm font-medium text-foreground tabular-nums min-w-[1.5rem] text-right">
               {data.routineScore}
             </span>
           </div>
@@ -36,27 +36,27 @@ export function Step2Routine({ data, onChange }: Step2RoutineProps) {
             max={10}
             value={data.routineScore}
             onChange={e => onChange({ routineScore: Number(e.target.value) })}
-            className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+            className="w-full"
             aria-valuemin={0}
             aria-valuemax={10}
             aria-valuenow={data.routineScore}
           />
-          <div className="flex justify-between text-xs text-muted-foreground">
-            <span>Organizado</span>
-            <span>Caotico</span>
+          <div className="flex justify-between text-[0.6875rem] text-muted-foreground/70">
+            <span>Estruturado</span>
+            <span>Disperso</span>
           </div>
         </div>
 
-        <div className="pt-4 border-t border-border">
-          <p className="text-sm text-muted-foreground">
-            {data.routineScore <= 3 && 'Dia bem estruturado e planejado.'}
+        <div className="pt-4 border-t border-border/50">
+          <p className="text-[0.8125rem] text-muted-foreground leading-relaxed">
+            {data.routineScore <= 3 && 'Dia com estrutura definida.'}
             {data.routineScore > 3 &&
               data.routineScore <= 6 &&
-              'Dia com estrutura moderada.'}
+              'Estrutura parcial.'}
             {data.routineScore > 6 &&
               data.routineScore <= 8 &&
-              'Dia com pouca estrutura.'}
-            {data.routineScore > 8 && 'Dia sem estrutura definida.'}
+              'Estrutura reduzida.'}
+            {data.routineScore > 8 && 'Sem estrutura percebida.'}
           </p>
         </div>
       </div>

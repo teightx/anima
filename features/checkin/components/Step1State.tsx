@@ -27,12 +27,12 @@ function SliderField({
   const id = label.toLowerCase().replace(/\s+/g, '-');
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2.5">
       <div className="flex items-center justify-between">
-        <label htmlFor={id} className="text-sm font-medium text-foreground">
+        <label htmlFor={id} className="text-sm text-muted-foreground">
           {label}
         </label>
-        <span className="text-sm font-medium text-muted-foreground tabular-nums">
+        <span className="text-sm font-medium text-foreground tabular-nums min-w-[1.5rem] text-right">
           {value}
         </span>
       </div>
@@ -43,13 +43,13 @@ function SliderField({
         max={max}
         value={value}
         onChange={e => onChange(Number(e.target.value))}
-        className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+        className="w-full"
         aria-valuemin={min}
         aria-valuemax={max}
         aria-valuenow={value}
       />
       {(lowLabel || highLabel) && (
-        <div className="flex justify-between text-xs text-muted-foreground">
+        <div className="flex justify-between text-[0.6875rem] text-muted-foreground/70">
           <span>{lowLabel}</span>
           <span>{highLabel}</span>
         </div>
@@ -62,21 +62,21 @@ export function Step1State({ data, onChange }: Step1StateProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-1">
-        <h3 className="text-lg font-medium">Estado geral</h3>
+        <h3 className="text-base font-medium">Estado atual</h3>
         <p className="text-sm text-muted-foreground">
-          Como voce esta se sentindo agora?
+          Registre como você percebe este momento.
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-5">
         <SliderField
           label="Humor"
           value={data.moodScore}
           onChange={value => onChange({ moodScore: value })}
           min={1}
           max={10}
-          lowLabel="Muito baixo"
-          highLabel="Muito alto"
+          lowLabel="Baixo"
+          highLabel="Alto"
         />
 
         <SliderField
@@ -85,8 +85,8 @@ export function Step1State({ data, onChange }: Step1StateProps) {
           onChange={value => onChange({ energyScore: value })}
           min={1}
           max={10}
-          lowLabel="Sem energia"
-          highLabel="Muita energia"
+          lowLabel="Baixa"
+          highLabel="Alta"
         />
 
         <SliderField
@@ -95,8 +95,8 @@ export function Step1State({ data, onChange }: Step1StateProps) {
           onChange={value => onChange({ anxietyLevel: value })}
           min={0}
           max={10}
-          lowLabel="Nenhuma"
-          highLabel="Intensa"
+          lowLabel="Ausente"
+          highLabel="Presente"
         />
       </div>
     </div>

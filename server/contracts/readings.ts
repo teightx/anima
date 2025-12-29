@@ -51,6 +51,7 @@ export const ReadingSchema = z.object({
   // References
   relatedCheckInIds: z.array(z.string().uuid()).optional(),
   relatedJournalIds: z.array(z.string().uuid()).optional(),
+  referenceId: z.string().uuid().optional(),
 });
 
 export type Reading = z.infer<typeof ReadingSchema>;

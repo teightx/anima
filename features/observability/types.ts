@@ -17,7 +17,7 @@ export interface DataPoint {
   label: string; // formatted day (e.g., "30 dez")
 }
 
-export type MetricKey = 'mood' | 'energy' | 'sleep';
+export type MetricKey = 'mood' | 'energy' | 'sleep' | 'dayOrganization';
 
 export interface MetricConfig {
   key: MetricKey;
@@ -29,21 +29,28 @@ export interface MetricConfig {
 }
 
 export const METRIC_CONFIGS: MetricConfig[] = [
-  { key: 'mood', title: 'Humor', min: 0, max: 10, color: 'hsl(210, 28%, 52%)' },
+  { key: 'mood', title: 'Humor percebido', min: 0, max: 10, color: 'hsl(205, 28%, 52%)' },
   {
     key: 'energy',
-    title: 'Energia',
+    title: 'Nível de energia',
     min: 0,
     max: 10,
-    color: 'hsl(180, 25%, 45%)',
+    color: 'hsl(200, 22%, 50%)',
   },
   {
     key: 'sleep',
-    title: 'Sono',
+    title: 'Duração do sono',
     min: 0,
     max: 12,
     unit: 'h',
-    color: 'hsl(220, 25%, 55%)',
+    color: 'hsl(210, 20%, 55%)',
+  },
+  {
+    key: 'dayOrganization',
+    title: 'Estrutura do dia',
+    min: 0,
+    max: 10,
+    color: 'hsl(215, 18%, 50%)',
   },
 ];
 
@@ -129,6 +136,8 @@ function getMetricValue(
       return checkin.energyScore ?? null;
     case 'sleep':
       return checkin.sleepHours ?? null;
+    case 'dayOrganization':
+      return checkin.dayOrganization ?? null;
     default:
       return null;
   }
